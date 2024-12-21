@@ -1,0 +1,31 @@
+.navbar {
+  /* border: 1px solid red; */
+  padding: 2rem 0;
+  margin-bottom: 2rem;
+  border-radius: 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: clamp(320px, 100%, 1900px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.nav-title {
+  font-size: 2rem;
+  margin-left: 2rem;
+}
+
+.nav-ul {
+  list-style: none;
+  display: flex;
+  margin-right: 2rem;
+}
+
+.nav-li {
+  /* margin-right: 2rem; */
+}
+
+.nav-link {
+  text-decoration: none;
+  color: #484848;
+}
