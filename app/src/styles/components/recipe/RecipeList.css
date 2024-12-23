@@ -1,0 +1,21 @@
+.recipe-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.recipe-list li {
+  padding: 0.5rem 1rem;
+  margin-bottom: var(--margin);
+  background-color: var(--background-color);
+  border: 1px solid #ddd;
+  border-radius: 1rem;
+  width: 200px;
+}
+
+.recipe-list li a {
+  color: var(--text-color);
+}
+
+.recipe-list li a:hover {
+  color: var(--primary-color);
+}

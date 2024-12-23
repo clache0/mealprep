@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import PasswordPrompt from './components/general/PasswordPrompt'
 import { GroupProvider } from './context/GroupProvider'
 import IngredientsPage from './components/ingredient/IngredientsPage'
+import RecipesPage from './components/recipe/RecipesPage'
 
 const App = () => {
   if (!import.meta.env.VITE_PASSWORD) {
@@ -55,7 +56,8 @@ const App = () => {
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<Layout/>}>
-                <Route path="/" element={<IngredientsPage/>}/>
+                <Route path="/" element={<RecipesPage/>}/>
+                <Route path="/ingredients" element={<IngredientsPage/>}/>
                 <Route path="/group/:groupId" element={
                   <RouteWrapper>
                     <GroupComponent/>

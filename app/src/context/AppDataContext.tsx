@@ -1,11 +1,13 @@
 import React, { createContext, useContext } from 'react';
-import { Ingredient } from '../types/types';
+import { Ingredient, Recipe } from '../types/types';
 
 interface AppDataContextType {
   ingredients: Ingredient[] | [];
+  recipes: Recipe[] | [];
   isLoading: boolean;
   isError: boolean;
   setIngredients: React.Dispatch<React.SetStateAction<Ingredient[] | []>>;
+  setRecipes: React.Dispatch<React.SetStateAction<Recipe[] | []>>;
 }
 
 export const AppDataContext = createContext<AppDataContextType | undefined>(undefined);

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, ReactNode } from 'react';
 import { AppDataContext } from './AppDataContext';
-import { Ingredient } from '../types/types';
+import { Ingredient, Recipe } from '../types/types';
 import { fetchAllIngredients } from '../api/apiIngredient';
 
 interface AppDataProviderProps {
@@ -9,6 +9,7 @@ interface AppDataProviderProps {
 
 export const AppDataProvider: React.FC<AppDataProviderProps> = ({ children }) => {
   const [ingredients, setIngredients] = useState<Ingredient[] | []>([]);
+  const [recipes, setRecipes] = useState<Recipe[] | []>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(true);
 
@@ -32,9 +33,11 @@ export const AppDataProvider: React.FC<AppDataProviderProps> = ({ children }) =>
   return (
     <AppDataContext.Provider value={{
       ingredients,
+      recipes,
       isLoading, 
       isError, 
       setIngredients,
+      setRecipes,
     }}>
       {children}
     </AppDataContext.Provider>

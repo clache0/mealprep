@@ -2,13 +2,13 @@ import React, { useState } from 'react';
 import '../../styles/components/ingredient/AddIngredientForm.css'
 import { Ingredient } from '../../types/types';
 
-interface AddGroupFormProps {
+interface AddIngredientFormProps {
   onSubmit: (ingredient: Ingredient) => void;
-  onShowForm: (showAddGroupForm: boolean) => void;
+  onShowForm: (showAddIngredientForm: boolean) => void;
   ingredient?: Ingredient; // optional ingredient for update
 }
 
-const AddIngredientForm: React.FC<AddGroupFormProps> = ({ onSubmit, onShowForm, ingredient }) => {
+const AddIngredientForm: React.FC<AddIngredientFormProps> = ({ onSubmit, onShowForm, ingredient }) => {
   const [name, setName] = useState<string>(ingredient?.name || '');
 
   const handleSubmit = (event: React.FormEvent) => {

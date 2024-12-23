@@ -5,6 +5,18 @@ export interface Ingredient {
   name: string;
 }
 
+export interface Recipe {
+  _id?: string;
+  name: string;
+  notes?: string;
+  ingredientQuantities: IngredientQuantities[];
+}
+
+export interface IngredientQuantities {
+  ingredientId: string;
+  quantity: string;
+}
+
 export interface User {
   _id?: string;
   firstName: string;

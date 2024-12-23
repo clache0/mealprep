@@ -104,7 +104,7 @@ const IngredientsPage = () => {
         onConfirm={handleDeleteIngredient}
         title="Confirm Delete"
       >
-        Are you sure you want to delete this expense?
+        Are you sure you want to delete this ingredient?
       </Modal>
     </div>
   )
