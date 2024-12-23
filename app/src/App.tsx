@@ -2,12 +2,12 @@ import { BrowserRouter, Route, Routes, useParams } from 'react-router-dom'
 import './App.css'
 import Layout from './components/layout/Layout'
 import PageUnderConstruction from './components/general/PageUnderConstruction'
-import Home from './components/Home'
 import GroupComponent from './components/group/GroupComponent'
 import UserComponent from './components/user/UserComponent'
 import { useEffect, useState } from 'react'
 import PasswordPrompt from './components/general/PasswordPrompt'
 import { GroupProvider } from './context/GroupProvider'
+import IngredientsPage from './components/ingredient/IngredientsPage'
 
 const App = () => {
   if (!import.meta.env.VITE_PASSWORD) {
@@ -55,7 +55,7 @@ const App = () => {
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<Layout/>}>
-                <Route path="/" element={<Home/>}/>
+                <Route path="/" element={<IngredientsPage/>}/>
                 <Route path="/group/:groupId" element={
                   <RouteWrapper>
                     <GroupComponent/>
@@ -69,4 +69,4 @@ const App = () => {
   )
 }
 
-export default App
+export default App;

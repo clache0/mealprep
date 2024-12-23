@@ -1,5 +1,10 @@
 import { z } from 'zod';
 
+export interface Ingredient {
+  _id?: string;
+  name: string;
+}
+
 export interface User {
   _id?: string;
   firstName: string;

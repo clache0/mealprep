@@ -1,28 +1,24 @@
 import React, { useState, useEffect, ReactNode } from 'react';
 import { AppDataContext } from './AppDataContext';
-import { fetchAllGroups } from '../api/apiGroup';
-import { fetchAllUsers } from '../api/apiUser';
-import { Group, User } from '../types/types';
+import { Ingredient } from '../types/types';
+import { fetchAllIngredients } from '../api/apiIngredient';
 
 interface AppDataProviderProps {
   children: ReactNode;
 }
 
 export const AppDataProvider: React.FC<AppDataProviderProps> = ({ children }) => {
-  const [groups, setGroups] = useState<Group[] | []>([]);
-  const [users, setUsers] = useState<User[] | []>([]);
+  const [ingredients, setIngredients] = useState<Ingredient[] | []>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(true);
 
   const fetchData = async () => {
     try {
-      // Fetch groups and users from your API
-      const fetchedGroups = await fetchAllGroups();
-      const fetchedUsers = await fetchAllUsers();
-      setGroups(fetchedGroups);
-      setUsers(fetchedUsers);
+      // Fetch ingredients and users from your API
+      const fetchedIngredients = await fetchAllIngredients();
+      setIngredients(fetchedIngredients);
     } catch (error) {
-      console.error("Error fetching groups and users:", error);
+      console.error("Error fetching ingredients:", error);
     } finally {
       setIsLoading(false);
       setIsError(false);
@@ -35,12 +31,10 @@ export const AppDataProvider: React.FC<AppDataProviderProps> = ({ children }) =>
 
   return (
     <AppDataContext.Provider value={{
-      groups,
-      users,
+      ingredients,
       isLoading, 
       isError, 
-      setGroups,
-      setUsers
+      setIngredients,
     }}>
       {children}
     </AppDataContext.Provider>

@@ -1,13 +1,11 @@
 import React, { createContext, useContext } from 'react';
-import { Group, User } from '../types/types';
+import { Ingredient } from '../types/types';
 
 interface AppDataContextType {
-  groups: Group[] | [];
-  users: User[] | [];
+  ingredients: Ingredient[] | [];
   isLoading: boolean;
   isError: boolean;
-  setGroups: React.Dispatch<React.SetStateAction<Group[] | []>>;
-  setUsers: React.Dispatch<React.SetStateAction<User[] | []>>;
+  setIngredients: React.Dispatch<React.SetStateAction<Ingredient[] | []>>;
 }
 
 export const AppDataContext = createContext<AppDataContextType | undefined>(undefined);

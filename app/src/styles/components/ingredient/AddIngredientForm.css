@@ -1,0 +1,63 @@
+.add-ingredient-form-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Make sure it's on top */
+}
+
+.add-ingredient-form-content {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.add-ingredient-form-content h2 {
+  margin-top: 0;
+}
+
+.add-ingredient-form-content form {
+  display: flex;
+  flex-direction: column;
+}
+
+.add-ingredient-form-content form div {
+  margin-bottom: 15px;
+}
+
+.add-ingredient-form-content form label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.add-ingredient-form-content form input[type="text"],
+.add-ingredient-form-content form input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.add-ingredient-form-content form button {
+  margin: 10px 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-ingredient-form-content form button[type="submit"] {
+  background-color: var(--primary-color);
+  color: var(--background-color);
+}
+
+.add-ingredient-form-content form button[type="button"] {
+  background-color: #ccc;
+}
