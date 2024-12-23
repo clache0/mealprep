@@ -3,9 +3,9 @@ import cors from "cors";
 import dotenv from "dotenv"
 import "express-async-errors";
 import serverless from "serverless-http"
-import groupRouter from "./routes/groups.mjs";
-import expenseRouter from "./routes/expenses.mjs";
-import userRouter from "./routes/users.mjs";
+import dayRouter from "./routes/days.mjs";
+import ingredientRouter from "./routes/ingredients.mjs";
+import recipeRouter from "./routes/recipes.mjs";
 
 dotenv.config();
 
@@ -18,9 +18,9 @@ app.use(cors());
 app.use(express.json());
 
 // Load routes
-app.use('/.netlify/functions/api/groups', groupRouter);
-app.use('/.netlify/functions/api/expenses', expenseRouter);
-app.use('/.netlify/functions/api/users', userRouter);
+app.use('/.netlify/functions/api/days', dayRouter);
+app.use('/.netlify/functions/api/recipes', recipeRouter);
+app.use('/.netlify/functions/api/ingredients', ingredientRouter);
 
 // Global error handling
 app.use((err, _req, res, next) => {
