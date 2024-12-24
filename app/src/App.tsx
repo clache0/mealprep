@@ -7,6 +7,7 @@ import PasswordPrompt from './components/general/PasswordPrompt'
 import IngredientsPage from './components/ingredient/IngredientsPage'
 import RecipesPage from './components/recipe/RecipesPage'
 import DaysPage from './components/day/DaysPage'
+import Home from './components/Home'
 
 const App = () => {
   if (!import.meta.env.VITE_PASSWORD) {
@@ -48,7 +49,8 @@ const App = () => {
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<Layout/>}>
-                <Route path="/" element={<DaysPage/>}/>
+                <Route path="/" element={<Home/>}/>
+                <Route path="/days" element={<DaysPage/>}/>
                 <Route path="/recipes" element={<RecipesPage/>}/>
                 <Route path="/ingredients" element={<IngredientsPage/>}/>
                 <Route path="/under-construction" element={<PageUnderConstruction/>}/>
