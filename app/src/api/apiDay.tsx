@@ -111,3 +111,26 @@ export const deleteDayById = async (dayId: string) => {
     throw error;
   };
 };
+
+export const addRecipeToDay = async (dayId: string, recipeId: string) => {
+  const url = config.serverUrl + `/days/${dayId}/add-recipe`;
+  try {
+    const response = await fetch(url, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ recipeId }),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to add recipe to day');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error adding recipe to day:", error);
+    throw error;
+  }
+};

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useAppData } from '../../context/AppDataContext';
 import '../../styles/components/home/DaysSection.css';
 import { getRecipeName } from '../../utils/utils';
-import DayHomeCard from '../day/DayHomeCard';
+import DayHomeCard from './DayHomeCard';
 
 interface DaysSectionProps {}
 

@@ -1,4 +1,4 @@
-import DaysSection from "./DaysSection";
+import DaysSection from "../day/DaysSection";
 
 const Home = () => {
   return (
