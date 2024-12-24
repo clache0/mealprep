@@ -9,6 +9,7 @@ import PasswordPrompt from './components/general/PasswordPrompt'
 import { GroupProvider } from './context/GroupProvider'
 import IngredientsPage from './components/ingredient/IngredientsPage'
 import RecipesPage from './components/recipe/RecipesPage'
+import DaysPage from './components/day/DaysPage'
 
 const App = () => {
   if (!import.meta.env.VITE_PASSWORD) {
@@ -56,7 +57,8 @@ const App = () => {
     <BrowserRouter>
         <Routes>
             <Route path="/" element={<Layout/>}>
-                <Route path="/" element={<RecipesPage/>}/>
+                <Route path="/" element={<DaysPage/>}/>
+                <Route path="/recipes" element={<RecipesPage/>}/>
                 <Route path="/ingredients" element={<IngredientsPage/>}/>
                 <Route path="/group/:groupId" element={
                   <RouteWrapper>

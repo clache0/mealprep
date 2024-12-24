@@ -1,0 +1,24 @@
+.day-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.day-link {
+  color: var(--primary-color);
+  padding: var(--padding);
+}
+
+.day-link-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.2s linear;
+}
+
+.day-link-container:hover .day-link-actions {
+  visibility: visible;
+  opacity: 1;
+}

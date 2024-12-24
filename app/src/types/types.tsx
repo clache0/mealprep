@@ -1,5 +1,11 @@
 import { z } from 'zod';
 
+export interface Day {
+  _id?: string;
+  name: string;
+  recipeIds: string[];
+}
+
 export interface Ingredient {
   _id?: string;
   name: string;
