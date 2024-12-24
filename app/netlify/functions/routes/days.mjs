@@ -44,7 +44,6 @@ dayRouter.post("/", async (req, res) => {
 dayRouter.post("/:id/add-recipe", async (req, res) => {
   const { id } = req.params;
   const { recipeId } = req.body;
-  console.log("recipeId: ", recipeId);
 
   // Check if recipeId is provided
   if (!recipeId) {
