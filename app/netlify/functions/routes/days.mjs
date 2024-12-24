@@ -40,6 +40,41 @@ dayRouter.post("/", async (req, res) => {
   }
 });
 
+// POST Add a recipe to a day
+dayRouter.post("/:id/add-recipe", async (req, res) => {
+  const { id } = req.params;
+  const { recipeId } = req.body;
+  console.log("recipeId: ", recipeId);
+
+  // Check if recipeId is provided
+  if (!recipeId) {
+    return res.status(400).json({ error: "recipeId is required" });
+  }
+
+  try {
+    const db = await connectToDatabase();
+    const collection = await db.collection("days");
+    const query = { _id: new ObjectId(id) };
+
+    // Use $addToSet to ensure recipeId is not added multiple times
+    const update = { $addToSet: { recipeIds: recipeId } };
+    const result = await collection.updateOne(query, update);
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: "Day not found" });
+    }
+
+    if (result.modifiedCount === 0) {
+      return res.status(200).json({ message: "Recipe already associated with the day" });
+    }
+
+    res.status(200).json({ message: "Recipe added to day successfully" });
+  } catch (error) {
+    console.error("Error adding recipe to day: ", error);
+    res.status(500).json({ error: "Failed to add recipe to day" });
+  }
+});
+
 // PATCH Update a single day
 dayRouter.patch("/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
