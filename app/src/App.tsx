@@ -7,7 +7,7 @@ import PasswordPrompt from './components/general/PasswordPrompt'
 import IngredientsPage from './components/ingredient/IngredientsPage'
 import RecipesPage from './components/recipe/RecipesPage'
 import DaysPage from './components/day/DaysPage'
-import Home from './components/Home'
+import Home from './components/home/Home'
 
 const App = () => {
   if (!import.meta.env.VITE_PASSWORD) {
