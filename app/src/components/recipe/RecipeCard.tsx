@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Button from "../general/Button";
 import "../../styles/components/recipe/RecipeCard.css"
 import { useState } from "react";
@@ -15,9 +14,9 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onUpdateRecipe, onDelet
   
   return (
     <div className="recipe-card">
-      <Link className="recipe-link" to={`/recipe/${recipe._id}`}>{recipe.name}</Link>
+      <h5>{recipe.name}</h5>
 
-      <div className="recipe-link-actions">
+      <div className="recipe-card-actions">
         <Button
           label='Edit'
           onClick={() => setIsEditing(true)}

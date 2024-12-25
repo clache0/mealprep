@@ -35,6 +35,25 @@ const DaysSection: React.FC<DaysSectionProps> = () => {
     setSelectedDayId(null);
   };
 
+  const dayList = sortedDays.map((day) => (
+    <div
+      key={day._id || day.name}
+      className="day-container"
+      onClick={() => handleDayClick(day._id!)}
+    >
+      <h3>{day.name}</h3>
+      <ul className="day-recipe-list">
+        {day.recipeIds.length > 0 ? (
+          day.recipeIds.map((recipeId) => (
+            <li key={recipeId}>{getRecipeName(recipes, recipeId)}</li>
+          ))
+        ) : (
+          <li>No recipes added</li>
+        )}
+      </ul>
+    </div>
+  ));
+
   return (
     <div className="days-section">
       <h2>Weekly Plan</h2>
@@ -42,24 +61,7 @@ const DaysSection: React.FC<DaysSectionProps> = () => {
         <DayHomeCard dayId={selectedDayId} onClose={handleCloseDayHomeCard} />
       ) : (
         <div className="days-container">
-          {sortedDays.map((day) => (
-            <div
-              key={day._id || day.name}
-              className="day-container"
-              onClick={() => handleDayClick(day._id!)}
-            >
-              <h3>{day.name}</h3>
-              <ul className="day-recipe-list">
-                {day.recipeIds.length > 0 ? (
-                  day.recipeIds.map((recipeId) => (
-                    <li key={recipeId}>{getRecipeName(recipes, recipeId)}</li>
-                  ))
-                ) : (
-                  <li>No recipes added</li>
-                )}
-              </ul>
-            </div>
-          ))}
+          {dayList}
         </div>
       )}
     </div>
