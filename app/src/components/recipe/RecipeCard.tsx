@@ -3,6 +3,7 @@ import "../../styles/components/recipe/RecipeCard.css"
 import { useState } from "react";
 import AddRecipeForm from "./AddRecipeForm";
 import { Recipe } from "../../types/types";
+import RecipeCardLarge from "./RecipeCardLarge";
 
 interface RecipeCardProps {
   recipe: Recipe;
@@ -11,10 +12,23 @@ interface RecipeCardProps {
 }
 const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onUpdateRecipe, onDeleteRecipe }) => {
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  const [showRecipeCardLarge, setShowRecipeCardLarge] = useState<boolean>(false);
   
+  const handleRecipeClick = () => {
+    setShowRecipeCardLarge(true);
+  }
+
+  const handleCloseRecipeCardLarge = () => {
+    setShowRecipeCardLarge(false);
+  }
+
   return (
     <div className="recipe-card">
-      <h5>{recipe.name}</h5>
+      <h5
+        onClick={handleRecipeClick}
+      >
+        {recipe.name}
+      </h5>
 
       <div className="recipe-card-actions">
         <Button
@@ -28,6 +42,10 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onUpdateRecipe, onDelet
           backgroundColor='var(--red)'
         />
       </div>
+
+      {showRecipeCardLarge && recipe._id &&
+        <RecipeCardLarge recipeId={recipe._id} onClose={handleCloseRecipeCardLarge} />
+      }
 
       {isEditing && (
         <AddRecipeForm  

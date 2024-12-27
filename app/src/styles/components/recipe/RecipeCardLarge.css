@@ -19,6 +19,10 @@
   max-width: 600px;
   width: 90%;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .recipe-card-large h2 {
@@ -30,14 +34,29 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 .recipe-card-large li {
-  margin: 8px 0;
-  padding: 8px;
+  margin: 5px 0;
+  padding: 5px 20px;
   background-color: var(--background-color);
   border-radius: 4px;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.recipe-notes-container {
+  margin: 20px 0;
+  padding: 10px;
+  border-radius: 1rem;
+  width: 75%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .close-button {
@@ -54,7 +73,7 @@
 }
 
 .close-button:hover {
-  background-color: darken(var(--red), 10%);
+  background-color: hsl(0, 100%, 45%);
 }
 
 .close-button:focus {

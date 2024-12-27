@@ -1,9 +1,7 @@
-import { useState } from "react";
 import { useAppData } from "../../context/AppDataContext";
 import "../../styles/components/recipe/RecipeList.css"
 import { Recipe } from "../../types/types";
 import RecipeCard from "./RecipeCard";
-import RecipeCardLarge from "./RecipeCardLarge";
 
 interface RecipeListProps {
   onUpdateRecipe: (recipe: Recipe) => void;
@@ -11,18 +9,6 @@ interface RecipeListProps {
 }
 const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe }) => {
   const { recipes } = useAppData();
-  const [showRecipeCardLarge, setShowRecipeCardLarge] = useState<boolean>(false);
-  const [selectedRecipeId, setSelectedRecipeId] = useState<string | null>(null);
-
-  const handleRecipeClick = (recipeId: string) => {
-    setSelectedRecipeId(recipeId);
-    setShowRecipeCardLarge(true);
-  };
-
-  const handleCloseRecipeCardLarge = () => {
-    setShowRecipeCardLarge(false);
-    setSelectedRecipeId(null);
-  };
 
   if (!recipes) {
     return <div>Loading Recipe List...</div>
@@ -32,7 +18,6 @@ const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe 
     <li 
       key={recipe._id || index} 
       className="recipe-link-container"
-      onClick={() => handleRecipeClick(recipe._id!)}
     >
       <RecipeCard
         recipe={recipe}
@@ -45,13 +30,9 @@ const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe 
   return (
     <>
       <h2>Recipe List</h2>
-      {showRecipeCardLarge && selectedRecipeId ? (
-        <RecipeCardLarge recipeId={selectedRecipeId} onClose={handleCloseRecipeCardLarge} />
-      ) : (
-        <ul className="recipe-list column-center">
-          {recipeList}
-        </ul>
-      )}
+      <ul className="recipe-list column-center">
+        {recipeList}
+      </ul>
     </>
   );
 };

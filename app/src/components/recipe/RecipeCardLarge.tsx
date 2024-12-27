@@ -45,6 +45,17 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onClose }) 
     ); // update context
   };
 
+  const handleDeleteIngredient = async (ingredientId: string) => {
+    const updatedIngredientQuantities = recipe.ingredientQuantities.filter(
+      (iq) => iq.ingredientId !== ingredientId
+    );
+
+    updateRecipe(recipeId, { 
+      ...recipe, 
+      ingredientQuantities: updatedIngredientQuantities 
+    });
+  };
+
   // update recipeIngredientNames when ingredients or recipe.ingredientQuantities changes
   useEffect(() => {
     const names = getIngredientNames(recipe, ingredients);
@@ -52,11 +63,20 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onClose }) 
   }, [ingredients, recipe.ingredientQuantities]);
 
   const recipeIngredientNamesList = recipeIngredientNames ? 
-    recipeIngredientNames.map((ingredientName, index) => (
-      <li key={index}>
-        {ingredientName}
-      </li>
-    )) : null;
+    recipe.ingredientQuantities.map((iq, index) => {
+      const ingredientName = recipeIngredientNames[index];
+      return (
+        <li key={index}>
+          {ingredientName}
+          <Button
+            label="X"
+            onClick={() => handleDeleteIngredient(iq.ingredientId)}
+            hoverColor=""
+            backgroundColor="var(--red)"
+          />
+        </li>
+      )
+  }) : null;
 
   return (
     <div className="recipe-card-large-backdrop">
@@ -65,6 +85,11 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onClose }) 
           Close
         </button>
         <h2>{recipe.name}</h2>
+
+        <div className="recipe-notes-container">
+          <h5>Notes</h5>
+          {recipe.notes}
+        </div>
 
         <Button
           label="Add Ingredient"
