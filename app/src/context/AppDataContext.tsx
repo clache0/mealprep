@@ -10,6 +10,8 @@ interface AppDataContextType {
   setIngredients: React.Dispatch<React.SetStateAction<Ingredient[] | []>>;
   setRecipes: React.Dispatch<React.SetStateAction<Recipe[] | []>>;
   setDays: React.Dispatch<React.SetStateAction<Day[] | []>>;
+  addIngredient: (newIngredient: Ingredient) => Promise<string>;
+  updateRecipe: (recipeId: string, updatedRecipe: Recipe) => void;
 }
 
 export const AppDataContext = createContext<AppDataContextType | undefined>(undefined);

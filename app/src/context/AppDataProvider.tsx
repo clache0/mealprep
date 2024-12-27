@@ -1,8 +1,8 @@
 import React, { useState, useEffect, ReactNode } from 'react';
 import { AppDataContext } from './AppDataContext';
 import { Day, Ingredient, Recipe } from '../types/types';
-import { fetchAllIngredients } from '../api/apiIngredient';
-import { fetchAllRecipes } from '../api/apiRecipe';
+import { fetchAllIngredients, postIngredient } from '../api/apiIngredient';
+import { fetchAllRecipes, patchRecipe } from '../api/apiRecipe';
 import { fetchAllDays } from '../api/apiDay';
 
 interface AppDataProviderProps {
@@ -15,6 +15,32 @@ export const AppDataProvider: React.FC<AppDataProviderProps> = ({ children }) =>
   const [days, setDays] = useState<Day[] | []>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [isError, setIsError] = useState(true);
+
+  const addIngredient = async (newIngredient: Ingredient): Promise<string> => {
+    try {
+      const newIngredientId = await postIngredient(newIngredient);
+      const updatedIngredient = { ...newIngredient, _id: newIngredientId };
+      setIngredients((prev) => [...prev, updatedIngredient]);
+      return newIngredientId;
+    }
+    catch (error) {
+      console.error("addIngredient: Failed to post ingredient: ", error);
+      throw new Error("Failed to add ingredient");
+    }
+  };
+  
+  const updateRecipe = async (recipeId: string, updatedRecipe: Recipe) => {
+    try {
+      await patchRecipe(updatedRecipe);
+      setRecipes((prev) =>
+        prev.map((recipe) => (recipe._id === recipeId ? updatedRecipe : recipe))
+      );
+      console.log("Successfully updated recipe");
+    } catch (error) {
+      console.log("Failed to updateRecipe: ", error);
+    }
+
+  };  
 
   const fetchData = async () => {
     try {
@@ -47,6 +73,8 @@ export const AppDataProvider: React.FC<AppDataProviderProps> = ({ children }) =>
       setIngredients,
       setRecipes,
       setDays,
+      addIngredient,
+      updateRecipe,
     }}>
       {children}
     </AppDataContext.Provider>
