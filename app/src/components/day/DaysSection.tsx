@@ -45,7 +45,9 @@ const DaysSection: React.FC<DaysSectionProps> = () => {
       <ul className="day-recipe-list">
         {day.recipeIds.length > 0 ? (
           day.recipeIds.map((recipeId) => (
-            <li key={recipeId}>{getRecipeName(recipes, recipeId)}</li>
+            <li key={recipeId}>
+              {getRecipeName(recipes, recipeId)}
+            </li>
           ))
         ) : (
           <li>No recipes added</li>

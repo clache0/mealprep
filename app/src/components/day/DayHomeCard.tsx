@@ -64,6 +64,17 @@ const DayHomeCard: React.FC<DayHomeCardProps> = ({ dayId, onClose }) => {
     }
   };
 
+  const recipeList = day.recipeIds.map((recipeId) => (
+    <li key={recipeId}>
+      {getRecipeName(recipes, recipeId)}
+      <Button
+        label="X"
+        onClick={() => handleDeleteRecipe(recipeId)}
+        backgroundColor='var(--red)'
+      />
+    </li>
+  ));
+
   return (
     <div className="day-home-card-backdrop" onClick={onClose}>
       <div className="day-home-card" onClick={(e) => e.stopPropagation()}>
@@ -72,24 +83,6 @@ const DayHomeCard: React.FC<DayHomeCardProps> = ({ dayId, onClose }) => {
         </button>
 
         <h2>{day.name}</h2>
-
-        {/* Recipe List */}
-        <ul>
-          {day.recipeIds.length > 0 ? (
-            day.recipeIds.map((recipeId) => (
-              <li key={recipeId}>
-                {getRecipeName(recipes, recipeId)}
-                <Button
-                  label="X"
-                  onClick={() => handleDeleteRecipe(recipeId)}
-                  backgroundColor='var(--red)'
-                />
-              </li>
-            ))
-          ) : (
-            <li>No recipes added</li>
-          )}
-        </ul>
 
         {/* Add Recipe */}
         <div className="add-recipe-section">
@@ -110,6 +103,15 @@ const DayHomeCard: React.FC<DayHomeCardProps> = ({ dayId, onClose }) => {
           </select>
           <button onClick={handleAddRecipe}>Add</button>
         </div>
+
+        {/* Recipe List */}
+        <ul>
+          {day.recipeIds.length > 0 ? (
+            recipeList
+          ) : (
+            <li>No recipes added</li>
+          )}
+        </ul>
 
       </div>
     </div>
