@@ -95,14 +95,16 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onUpdateRec
         <h2>{recipe.name}</h2>
 
         <Button
-          label="Edit Recipe"
+          label="Edit Name and Notes"
           onClick={() => setIsEditing(true)}
           backgroundColor="var(--primary-color)"
         />
 
         <div className="recipe-notes-container">
           <h5>Notes</h5>
-          {recipe.notes}
+          <p>
+            {recipe.notes}
+          </p>
         </div>
 
         <Button

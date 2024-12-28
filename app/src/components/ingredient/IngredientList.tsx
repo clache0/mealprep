@@ -30,7 +30,7 @@ const IngredientList: React.FC<IngredientListProps> = ({ onUpdateIngredient, onD
   return (
     <>
       <h2>Ingredient List</h2>
-      <ul className="ingredient-list column-center">
+      <ul className="ingredient-list">
         {ingredientList}
       </ul>
     </>
