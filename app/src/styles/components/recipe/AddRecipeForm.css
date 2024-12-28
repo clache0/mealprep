@@ -31,6 +31,17 @@
   flex-direction: column;
 }
 
+.add-recipe-form-content form textarea {
+  width: 100%;
+  height: 100px;
+  resize: vertical;
+  padding: 10px;
+  border-radius: 0.8rem;
+  border: 1px solid #ddd;
+  box-sizing: border-box;
+  font-size: 0.8rem;
+}
+
 .ingredient-quantities-container {
   overflow-y: auto;
 }
