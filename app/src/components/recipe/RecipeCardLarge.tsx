@@ -67,7 +67,8 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onClose }) 
       const ingredientName = recipeIngredientNames[index];
       return (
         <li key={index}>
-          {ingredientName}
+          <p>{ingredientName}</p>
+          <p>{iq.quantity}</p>
           <Button
             label="X"
             onClick={() => handleDeleteIngredient(iq.ingredientId)}
