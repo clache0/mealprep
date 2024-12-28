@@ -2,26 +2,27 @@ import React, { useEffect, useState } from "react";
 import { useAppData } from "../../context/AppDataContext";
 import "../../styles/components/recipe/RecipeCardLarge.css";
 import { getIngredientIdFromName, getIngredientNames } from "../../utils/utils";
-import { Ingredient, IngredientQuantities } from "../../types/types";
+import { Ingredient, IngredientQuantities, Recipe } from "../../types/types";
 import AddIngredientToRecipeForm from "../ingredient/AddIngredientToRecipeForm";
 import Button from "../general/Button";
+import AddRecipeForm from "./AddRecipeForm";
 
 interface RecipeCardLargeProps {
   recipeId: string;
+  onUpdateRecipe: (recipe: Recipe) => void;
   onClose: () => void;
 }
 
-const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onClose }) => {
+const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onUpdateRecipe, onClose }) => {
   const { recipes, ingredients, addIngredient, updateRecipe } = useAppData();
   const [showAddIngredientToRecipeForm, setShowAddIngredientToRecipeForm] = useState<boolean>(false);
   const [recipeIngredientNames, setRecipeIngredientNames] = useState<string[]>([]);
   const recipe = recipes.find((recipe) => recipe._id === recipeId);
+  const [isEditing, setIsEditing] = useState<boolean>(false);
 
   if (!recipe) {
     return <div>Recipe not found.</div>;
   }
-
-  // TODO edit notes if clicked
 
   const handleAddIngredient = async (newIngredient: Ingredient, quantity: string) => {
     const existingIngredientId = getIngredientIdFromName(ingredients, newIngredient.name);
@@ -84,10 +85,20 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onClose }) 
   return (
     <div className="recipe-card-large-backdrop">
       <div className="recipe-card-large">
-        <button className="close-button" onClick={onClose}>
+        <button 
+          className="close-button"
+          onClick={onClose}
+        >
           Close
         </button>
+
         <h2>{recipe.name}</h2>
+
+        <Button
+          label="Edit Recipe"
+          onClick={() => setIsEditing(true)}
+          backgroundColor="var(--primary-color)"
+        />
 
         <div className="recipe-notes-container">
           <h5>Notes</h5>
@@ -108,6 +119,17 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onClose }) 
         <ul>
           {recipeIngredientNamesList}
         </ul>
+
+        {isEditing && (
+          <AddRecipeForm  
+            onSubmit={(updatedRecipe: Recipe) => {
+              onUpdateRecipe(updatedRecipe);
+              setIsEditing(false);
+            }}
+            onShowForm={setIsEditing}
+            recipe={recipe}
+          /> 
+        )}
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ export interface Day {
 export interface Ingredient {
   _id?: string;
   name: string;
+  // todo add category to ingredient
 }
 
 export interface Recipe {
@@ -14,6 +15,7 @@ export interface Recipe {
   name: string;
   notes?: string;
   ingredientQuantities: IngredientQuantities[];
+  // todo add category to recipe
 }
 
 export interface IngredientQuantities {
