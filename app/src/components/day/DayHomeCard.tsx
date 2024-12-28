@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { useAppData } from '../../context/AppDataContext';
 import { getRecipeName } from '../../utils/utils';
 import '../../styles/components/day/DayHomeCard.css';
-import { addRecipeToDay } from '../../api/apiDay';
+import { addRecipeToDay, deleteRecipeFromDay } from '../../api/apiDay';
+import Button from '../general/Button';
 
 interface DayHomeCardProps {
   dayId: string;
@@ -34,7 +35,7 @@ const DayHomeCard: React.FC<DayHomeCardProps> = ({ dayId, onClose }) => {
           prevDays.map((d) => (d._id === day._id ? updatedDay : d))
         );
       } catch (error) {
-        console.log("handleAddRecipe error trying to addRecipeToDay: ", error);
+        console.error("handleAddRecipe error trying to addRecipeToDay: ", error);
       }
 
       // clear selected recipe
@@ -42,6 +43,24 @@ const DayHomeCard: React.FC<DayHomeCardProps> = ({ dayId, onClose }) => {
     }
     else {
       console.error("handleAddRecipe new recipe id, day id need to be checked");
+    }
+  };
+
+  const handleDeleteRecipe = async (recipeId: string) => {
+    if (day && day._id) {
+      const updatedDay = {
+        ...day,
+        recipeIds: day.recipeIds.filter((id) => id !== recipeId),
+      };
+
+      try {
+        await deleteRecipeFromDay(day._id, recipeId);
+        setDays((prevDays) =>
+          prevDays.map((d) => (d._id === day._id ? updatedDay : d))
+        );
+      } catch (error) {
+        console.error('handleDeleteRecipe error trying to deleteRecipeFromDay: ', error);
+      }
     }
   };
 
@@ -58,7 +77,14 @@ const DayHomeCard: React.FC<DayHomeCardProps> = ({ dayId, onClose }) => {
         <ul>
           {day.recipeIds.length > 0 ? (
             day.recipeIds.map((recipeId) => (
-              <li key={recipeId}>{getRecipeName(recipes, recipeId)}</li>
+              <li key={recipeId}>
+                {getRecipeName(recipes, recipeId)}
+                <Button
+                  label="X"
+                  onClick={() => handleDeleteRecipe(recipeId)}
+                  backgroundColor='var(--red)'
+                />
+              </li>
             ))
           ) : (
             <li>No recipes added</li>

@@ -134,3 +134,25 @@ export const addRecipeToDay = async (dayId: string, recipeId: string) => {
     throw error;
   }
 };
+
+export const deleteRecipeFromDay = async (dayId: string, recipeId: string) => {
+  const url = `${config.serverUrl}/days/${dayId}/recipes/${recipeId}`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to delete recipe from day');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error deleting recipe from day:', error);
+    throw error;
+  }
+};
