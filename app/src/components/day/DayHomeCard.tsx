@@ -43,6 +43,9 @@ const DayHomeCard: React.FC<DayHomeCardProps> = ({ dayId, onClose }) => {
     }
     else {
       console.error("handleAddRecipe new recipe id, day id need to be checked");
+      if (day.recipeIds.includes(newRecipeId)) {
+        alert("Recipe has already been added to day");
+      }
     }
   };
 

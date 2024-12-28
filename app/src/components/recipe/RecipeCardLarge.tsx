@@ -21,6 +21,8 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onClose }) 
     return <div>Recipe not found.</div>;
   }
 
+  // TODO edit notes if clicked
+
   const handleAddIngredient = async (newIngredient: Ingredient, quantity: string) => {
     const existingIngredientId = getIngredientIdFromName(ingredients, newIngredient.name);
     let ingredientId: string = "";

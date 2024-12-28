@@ -6,6 +6,7 @@ const Home = () => {
       <h1>Home Page</h1>
       <div>
         <DaysSection/>
+        {/* TODO: add all ingredients from recipe section */}
       </div>
     </div>
   );
