@@ -128,4 +128,42 @@ dayRouter.delete("/:id", async (req, res) => {
   }
 });
 
+// DELETE a recipe from a day
+dayRouter.delete("/:id/recipes/:recipeId", async (req, res) => {
+  const { id, recipeId } = req.params;
+
+  // Validate the input
+  if (!ObjectId.isValid(id)) {
+    return res.status(400).json({ error: "Invalid day ID" });
+  }
+
+  if (!recipeId) {
+    return res.status(400).json({ error: "Recipe ID is required" });
+  }
+
+  try {
+    const db = await connectToDatabase();
+    const collection = db.collection("days");
+    const query = { _id: new ObjectId(id) };
+
+    // Use $pull to remove the recipeId from the recipeIds array
+    const update = { $pull: { recipeIds: recipeId } };
+    const result = await collection.updateOne(query, update);
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: "Day not found" });
+    }
+
+    if (result.modifiedCount === 0) {
+      return res.status(200).json({ message: "Recipe not associated with this day" });
+    }
+
+    res.status(200).json({ message: "Recipe removed from day successfully" });
+  } catch (error) {
+    console.error("Error removing recipe from day: ", error);
+    res.status(500).json({ error: "Failed to remove recipe from day" });
+  }
+});
+
+
 export default dayRouter;
