@@ -7,9 +7,11 @@ import DayHomeCard from './DayHomeCard';
 interface DaysSectionProps {}
 
 const DaysSection: React.FC<DaysSectionProps> = () => {
-  const { days, recipes } = useAppData();
+  const { days, recipes, isLoading } = useAppData();
   const [showDayHomeCard, setShowDayHomeCard] = useState<boolean>(false);
   const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
+
+  if (isLoading) return <div><h3>Loading...</h3></div>
 
   const dayOrder = [
     'Monday',
