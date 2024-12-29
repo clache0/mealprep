@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppData } from '../../context/AppDataContext';
-import '../../styles/components/home/DaysSection.css';
+import '../../styles/components/day/DaysSection.css';
 import { getRecipeName } from '../../utils/utils';
 import DayHomeCard from './DayHomeCard';
 

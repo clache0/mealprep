@@ -1,11 +1,13 @@
 .days-section {
   padding: 20px;
   max-width: 1200px;
-  margin: 0 auto;
+  margin-right: 10px;
   background-color: var(--background-color);
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   color: var(--text-color);
+  width: 60%;
+  height: 60vh;
 }
 
 .days-section h2 {

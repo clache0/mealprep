@@ -65,6 +65,7 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onUpdateRec
     setRecipeIngredientNames(names);
   }, [ingredients, recipe.ingredientQuantities]);
 
+  // todo: list gets cut off when too many ing
   const recipeIngredientNamesList = recipeIngredientNames ? 
     recipe.ingredientQuantities.map((iq, index) => {
       const ingredientName = recipeIngredientNames[index];
