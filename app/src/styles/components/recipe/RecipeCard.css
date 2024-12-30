@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  /* todo recipe card wider */
 }
 
 .recipe-card:hover {

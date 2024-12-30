@@ -19,6 +19,7 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onUpdateRec
   const [recipeIngredientNames, setRecipeIngredientNames] = useState<string[]>([]);
   const recipe = recipes.find((recipe) => recipe._id === recipeId);
   const [isEditing, setIsEditing] = useState<boolean>(false);
+  // todo edit recipe ingredient quantity
 
   if (!recipe) {
     return <div>Recipe not found.</div>;

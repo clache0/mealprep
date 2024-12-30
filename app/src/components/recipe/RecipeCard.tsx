@@ -11,6 +11,7 @@ interface RecipeCardProps {
 }
 const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onUpdateRecipe, onDeleteRecipe }) => {
   const [showRecipeCardLarge, setShowRecipeCardLarge] = useState<boolean>(false);
+  // todo add image to recipe
   
   const handleRecipeClick = () => {
     setShowRecipeCardLarge(true);

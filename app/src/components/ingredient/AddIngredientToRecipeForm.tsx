@@ -14,6 +14,7 @@ const AddIngredientToRecipeForm: React.FC<AddIngredientToRecipeFormProps> = ({ o
   const [name, setName] = useState<string>(ingredient?.name || '');
   const [quantity, setQuantity] = useState<string>('');
   const { ingredients } = useAppData();
+  // todo click on name text box when form is open
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
