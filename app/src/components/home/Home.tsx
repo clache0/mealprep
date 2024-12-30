@@ -6,8 +6,10 @@ import IngredientsSection from "../ingredient/IngredientsSection";
 import "../../styles/components/home/Home.css";
 
 const Home = () => {
-  const { days, recipes, ingredients } = useAppData();
+  const { days, recipes, ingredients, isLoading } = useAppData();
   const weeklyIngredients: Ingredient[] = getUniqueIngredients(days, recipes, ingredients);
+
+  if (isLoading) return <div><h3>Loading...</h3></div>
 
   return (
     <div>
