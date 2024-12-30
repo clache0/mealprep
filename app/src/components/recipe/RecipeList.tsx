@@ -31,7 +31,7 @@ const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe 
   return (
     <>
       <h2>Recipe List</h2>
-      <ul className="recipe-list column-center">
+      <ul className="recipe-list">
         {recipeList}
       </ul>
     </>
