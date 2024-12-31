@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../styles/components/recipe/AddRecipeForm.css'
 import { IngredientQuantities, Recipe } from '../../types/types';
 // import { useAppData } from '../../context/AppDataContext';
@@ -17,6 +17,15 @@ const AddRecipeForm: React.FC<AddRecipeFormProps> = ({ onSubmit, onShowForm, rec
   const [ingredientQuantities, setIngredientQuantities] = useState<IngredientQuantities[]>(
     recipe?.ingredientQuantities || []
   );
+
+  const nameInputRef = useRef<HTMLInputElement | null>(null);
+  
+  // auto focus to name input for form component is mounted
+  useEffect(() => {
+    if (nameInputRef.current) {
+      nameInputRef.current.focus();
+    }
+  }, []);
 
   // const handleIngredientChange = (index: number, field: string, value: string) => {
   //   const updatedIngredients = [...ingredientQuantities];
@@ -70,6 +79,7 @@ const AddRecipeForm: React.FC<AddRecipeFormProps> = ({ onSubmit, onShowForm, rec
             <input
               type="text"
               id="name"
+              ref={nameInputRef}
               value={name}
               onChange={(event) => setName(event.target.value)}
             />
