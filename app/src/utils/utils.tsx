@@ -48,3 +48,5 @@ export const getUniqueIngredients = (
   return uniqueIngredients.filter((ingredient): ingredient is Ingredient => !!ingredient);
 };
 
+export const sortAlphabetically = <T extends { name: string }>(data: T[]): T[] =>
+  [...data].sort((a, b) => a.name.localeCompare(b.name));

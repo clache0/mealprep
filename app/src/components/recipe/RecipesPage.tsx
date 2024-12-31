@@ -7,6 +7,7 @@ import RecipeList from "./RecipeList";
 import AddRecipeForm from "./AddRecipeForm";
 import Button from "../general/Button";
 import Modal from "../general/Modal";
+import { sortAlphabetically } from "../../utils/utils";
 
 const RecipesPage = () => {
   const { setRecipes } = useAppData();
@@ -14,13 +15,12 @@ const RecipesPage = () => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [showAddRecipeForm, setShowAddRecipeForm] = useState<boolean>(false);
   // todo filter recipe by category
-  // todo search for recipes
 
   const handleAddRecipe = async (recipe: Recipe) => {
     try {
       const recipeId = await postRecipe(recipe); // post recipe to server
       const newRecipe = { ...recipe, _id: recipeId };
-      setRecipes((prevRecipes) => [...prevRecipes, newRecipe]);
+      setRecipes((prevRecipes) => sortAlphabetically([...prevRecipes, newRecipe]));
     } catch (error) {
       console.error("Error posting recipe: ", error);
     }
@@ -29,9 +29,11 @@ const RecipesPage = () => {
   const handleUpdateRecipe = async (updatedRecipe: Recipe) => {
     try {
       await patchRecipe(updatedRecipe); // post recipe to server
-      setRecipes((prevRecipes) => 
-        prevRecipes.map((recipe) =>
-          recipe._id === updatedRecipe._id ? updatedRecipe : recipe
+      setRecipes((prevRecipes) =>
+        sortAlphabetically(
+          prevRecipes.map((recipe) =>
+            recipe._id === updatedRecipe._id ? updatedRecipe : recipe
+          )
         )
       );
     } catch (error) {

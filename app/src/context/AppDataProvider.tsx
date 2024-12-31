@@ -4,6 +4,7 @@ import { Day, Ingredient, Recipe } from '../types/types';
 import { fetchAllIngredients, postIngredient } from '../api/apiIngredient';
 import { fetchAllRecipes, patchRecipe } from '../api/apiRecipe';
 import { fetchAllDays } from '../api/apiDay';
+import { sortAlphabetically } from '../utils/utils';
 
 interface AppDataProviderProps {
   children: ReactNode;
@@ -20,7 +21,9 @@ export const AppDataProvider: React.FC<AppDataProviderProps> = ({ children }) =>
     try {
       const newIngredientId = await postIngredient(newIngredient);
       const updatedIngredient = { ...newIngredient, _id: newIngredientId };
-      setIngredients((prev) => [...prev, updatedIngredient]);
+      setIngredients((prev) => 
+        sortAlphabetically([...prev, updatedIngredient])
+      );
       return newIngredientId;
     }
     catch (error) {
@@ -33,7 +36,9 @@ export const AppDataProvider: React.FC<AppDataProviderProps> = ({ children }) =>
     try {
       await patchRecipe(updatedRecipe);
       setRecipes((prev) =>
-        prev.map((recipe) => (recipe._id === recipeId ? updatedRecipe : recipe))
+        sortAlphabetically(
+          prev.map((recipe) => (recipe._id === recipeId ? updatedRecipe : recipe))
+        )
       );
       console.log("Successfully updated recipe");
     } catch (error) {
@@ -44,12 +49,12 @@ export const AppDataProvider: React.FC<AppDataProviderProps> = ({ children }) =>
 
   const fetchData = async () => {
     try {
-      // Fetch ingredients and users from your API
-      const fetchedIngredients = await fetchAllIngredients();
-      const fetchedRecipes = await fetchAllRecipes();
-      const fetchedDays = await fetchAllDays();
-      setIngredients(fetchedIngredients);
-      setRecipes(fetchedRecipes);
+      const fetchedIngredients: Ingredient[] = await fetchAllIngredients();
+      const fetchedRecipes: Recipe[] = await fetchAllRecipes();
+      const fetchedDays: Day[] = await fetchAllDays();
+      
+      setIngredients(sortAlphabetically(fetchedIngredients));
+      setRecipes(sortAlphabetically(fetchedRecipes));
       setDays(fetchedDays);
     } catch (error) {
       console.error("Error fetching ingredients, recipes, or days:", error);

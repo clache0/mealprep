@@ -7,6 +7,7 @@ import IngredientList from "./IngredientList";
 import AddIngredientForm from "./AddIngredientForm";
 import Button from "../general/Button";
 import Modal from "../general/Modal";
+import { sortAlphabetically } from "../../utils/utils";
 
 const IngredientsPage = () => {
   const { setIngredients } = useAppData();
@@ -18,7 +19,9 @@ const IngredientsPage = () => {
     try {
       const ingredientId = await postIngredient(ingredient); // post ingredient to server
       const newIngredient = { ...ingredient, _id: ingredientId };
-      setIngredients((prevIngredients) => [...prevIngredients, newIngredient]);
+      setIngredients((prevIngredients) =>
+        sortAlphabetically([...prevIngredients, newIngredient])
+      );
     } catch (error) {
       console.error("Error posting ingredient: ", error);
     }
@@ -27,9 +30,11 @@ const IngredientsPage = () => {
   const handleUpdateIngredient = async (updatedIngredient: Ingredient) => {
     try {
       await patchIngredient(updatedIngredient); // post ingredient to server
-      setIngredients((prevIngredients) => 
-        prevIngredients.map((ingredient) =>
-          ingredient._id === updatedIngredient._id ? updatedIngredient : ingredient
+      setIngredients((prevIngredients) =>
+        sortAlphabetically(
+          prevIngredients.map((ingredient) =>
+            ingredient._id === updatedIngredient._id ? updatedIngredient : ingredient
+          )
         )
       );
     } catch (error) {
