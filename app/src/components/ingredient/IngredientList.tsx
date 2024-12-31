@@ -38,12 +38,16 @@ const IngredientList: React.FC<IngredientListProps> = ({ onUpdateIngredient, onD
   return (
     <>
       <h2>Ingredient List</h2>
+
+      {/* Search Bar */}
       <div className="search-bar-container">
         <SearchBar
           data={ingredients}
           onSearchResults={setFilteredIngredients}
         />
       </div>
+
+      {/* Ingredient List */}
       <ul className="ingredient-list">
         {ingredientList.length > 0 ? ingredientList : <li>No ingredients found.</li>}
       </ul>
