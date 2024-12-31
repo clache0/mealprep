@@ -9,7 +9,6 @@ interface RecipeListProps {
 }
 const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe }) => {
   const { recipes } = useAppData();
-  // todo change list to grid
 
   if (!recipes) {
     return <div>Loading Recipe List...</div>

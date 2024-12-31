@@ -24,34 +24,34 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  overflow: hidden;
 }
 
 .recipe-card-large h2 {
-  margin-bottom: 16px;
+  margin-top: 8px;
+  margin-bottom: 10px;
   text-align: center;
 }
 
 .recipe-card-large h5 {
   text-align: center;
-  margin: 5px 0;
+  margin: 0;
 }
 
 .recipe-card-large ul {
   list-style-type: none;
-  padding: 0 40px;
+  padding: 0px 10px;
   margin: 0;
   display: flex;
   flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
-  justify-content: center;
   overflow-y: auto;
-  width: 70%;
+  width: 80%;
 }
 
 .recipe-card-large li {
-  margin: 5px 0;
-  padding: 0px 20px;
+  margin: 3px 0;
+  padding: 3px 20px;
   background-color: var(--background-color);
   border-radius: 0.8rem;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
@@ -61,10 +61,13 @@
   width: 80%;
 }
 
-
-
 .recipe-card-large p {
   margin: 5px 0;
+}
+
+.right-container {
+  display: flex;
+  gap: 10px;
 }
 
 .recipe-notes-container {
