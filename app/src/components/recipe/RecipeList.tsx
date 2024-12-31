@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppData } from "../../context/AppDataContext";
 import "../../styles/components/recipe/RecipeList.css";
 import { Recipe } from "../../types/types";
@@ -17,6 +17,11 @@ const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe 
   if (!recipes) {
     return <div>Loading Recipe List...</div>;
   }
+
+  // update filtered recipes if full list changes
+  useEffect(() => {
+    setFilteredRecipes(recipes);
+  }, [recipes]);
 
   const recipeList = filteredRecipes.length ? (
     filteredRecipes.map((recipe, index) => (
