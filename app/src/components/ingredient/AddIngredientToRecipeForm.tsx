@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import '../../styles/components/ingredient/AddIngredientForm.css';
 import { Ingredient } from '../../types/types';
 import { useAppData } from '../../context/AppDataContext';
@@ -14,7 +14,15 @@ const AddIngredientToRecipeForm: React.FC<AddIngredientToRecipeFormProps> = ({ o
   const [name, setName] = useState<string>(ingredient?.name || '');
   const [quantity, setQuantity] = useState<string>('');
   const { ingredients } = useAppData();
-  // todo click on name text box when form is open
+
+  const nameInputRef = useRef<HTMLInputElement | null>(null);
+
+  // auto focus to name input for form component is mounted
+  useEffect(() => {
+    if (nameInputRef.current) {
+      nameInputRef.current.focus();
+    }
+  }, []);
 
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -56,6 +64,7 @@ const AddIngredientToRecipeForm: React.FC<AddIngredientToRecipeFormProps> = ({ o
             <input
               type="text"
               id="name"
+              ref={nameInputRef}
               value={name}
               onChange={(event) => setName(event.target.value)}
             />
