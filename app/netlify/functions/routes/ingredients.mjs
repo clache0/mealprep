@@ -10,7 +10,7 @@ ingredientRouter.get("/", async (req, res) => {
     const db = await connectToDatabase();
     const collection = await db.collection("ingredients");
     const results = await collection.find({})
-      .limit(50)
+      .limit(500)
       .toArray();
 
       if (results.length === 0) {
