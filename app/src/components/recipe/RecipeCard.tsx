@@ -11,7 +11,6 @@ interface RecipeCardProps {
 }
 const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onUpdateRecipe, onDeleteRecipe }) => {
   const [showRecipeCardLarge, setShowRecipeCardLarge] = useState<boolean>(false);
-  // todo add image to recipe
   
   const handleRecipeClick = () => {
     setShowRecipeCardLarge(true);
@@ -23,11 +22,12 @@ const RecipeCard: React.FC<RecipeCardProps> = ({ recipe, onUpdateRecipe, onDelet
 
   return (
     <div className="recipe-card">
-      <h5
-        onClick={handleRecipeClick}
-      >
-        {recipe.name}
-      </h5>
+      <div className="recipe-card-name-container">
+        {recipe.emoji}
+        <h5 onClick={handleRecipeClick}>
+          {recipe.name}
+        </h5>
+      </div>
 
       <div className="recipe-card-actions">
         <Button

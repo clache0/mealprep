@@ -15,6 +15,7 @@ export interface Recipe {
   name: string;
   notes?: string;
   ingredientQuantities: IngredientQuantities[];
+  emoji?: string;
   // todo add category to recipe
 }
 

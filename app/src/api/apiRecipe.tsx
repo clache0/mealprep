@@ -89,6 +89,29 @@ export const patchRecipe = async (recipe: Recipe) => {
   }
 };
 
+export const saveEmoji = async (recipeId: string, emoji: string) => {
+  const url = config.serverUrl + `/recipes/${recipeId}/emoji`;
+  
+  try {
+    const response = await fetch(url, {
+      method: 'PATCH',
+      headers: { 
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ emoji }),
+    });
+
+    if (!response.ok) {
+      const errorText = await response.text();
+      console.error('Server response: ', errorText);
+      throw new Error('Failed to patch recipe emoji');
+    }
+    return response;
+  } catch (error) {
+    console.error('Error patching recipe emoji:', error);
+  }
+};  
+
 export const deleteRecipeById = async (recipeId: string) => {
   const url = config.serverUrl + `/recipes/${recipeId}`;
 
