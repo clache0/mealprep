@@ -78,6 +78,36 @@ recipeRouter.patch("/:id", async (req, res) => {
   }
 });
 
+// PATCH save emoji to recipe
+recipeRouter.patch("/:id/emoji", async (req, res) => {
+  const query = { _id: new ObjectId(req.params.id) };
+  const { emoji } = req.body;
+  const updates = { $set: {} };
+
+  if (!emoji) {
+    return res.status(400).json({ error: "Emoji is required." });
+  }
+
+  updates["$set"]["emoji"] = emoji;
+
+  try {
+    const db = await connectToDatabase();
+    const collection = await db.collection("recipes");
+    const result = await collection.updateOne(query, updates);
+
+    if (result.matchedCount === 0) {
+      return res.status(404).json({ error: "Recipe not found." });
+    }
+    if (result.modifiedCount === 0) {
+      return res.status(200).json({ error: "Emoji not modified." });
+    }
+    res.status(200).send(result);
+  } catch (error) {
+    console.error("Error updating emoji from patch /:id/emoji", error);
+    res.status(500).json({ error: "Failed to update emoji." });
+  }
+});
+
 // DELETE single recipe
 recipeRouter.delete("/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
