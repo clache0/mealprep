@@ -8,6 +8,7 @@ import Button from "../general/Button";
 import AddRecipeForm from "./AddRecipeForm";
 import RecipeEmojiSelector from "./RecipeEmojiSelector";
 import { saveEmoji } from "../../api/apiRecipe";
+import EditRecipeIngredientsForm from "./EditRecipeIngredientsForm";
 
 interface RecipeCardLargeProps {
   recipeId: string;
@@ -22,7 +23,7 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onUpdateRec
   const [recipeIngredientNames, setRecipeIngredientNames] = useState<string[]>([]);
   const recipe = recipes.find((recipe) => recipe._id === recipeId);
   const [isEditing, setIsEditing] = useState<boolean>(false);
-  // todo edit recipe ingredient quantity
+  const [editingIndex, setEditingIndex] = useState<number | null>(null);
 
   if (!recipe) {
     return <div>Recipe not found.</div>;
@@ -88,11 +89,6 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onUpdateRec
     }
   };
 
-  // Close emoji selector
-  const handleCloseRecipeEmojiSelector = () => {
-    setShowSaveEmoji(false);
-  }
-
   // Update recipeIngredientNames when ingredients or recipe.ingredientQuantities changes
   useEffect(() => {
     const names = getIngredientNames(recipe, ingredients);
@@ -104,7 +100,7 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onUpdateRec
     recipe.ingredientQuantities.map((iq, index) => {
       const ingredientName = recipeIngredientNames[index];
       return (
-        <li key={index}>
+        <li key={index} onClick={() => setEditingIndex(index)}>
           <p>{ingredientName}</p>
           <div className="right-container">
             <p>{iq.quantity}</p>
@@ -184,7 +180,7 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onUpdateRec
           <RecipeEmojiSelector
             recipe={recipe}
             onSaveEmoji={handleSaveEmoji}
-            onClose={handleCloseRecipeEmojiSelector}
+            onClose={() => setShowSaveEmoji(false)}
           />
         }
 
@@ -198,6 +194,19 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onUpdateRec
             onShowForm={setIsEditing}
             recipe={recipe}
           /> 
+        )}
+
+        {/* Edit Ingredients Form */}
+        {editingIndex !== null && (
+          <EditRecipeIngredientsForm
+            recipe={recipe}
+            ingredientIndex={editingIndex}
+            onClose={() => setEditingIndex(null)}
+            onSave={(updatedQuantities) => {
+              updateRecipe(recipeId, { ...recipe, ingredientQuantities: updatedQuantities });
+              setEditingIndex(null);
+            }}
+          />
         )}
       </div>
     </>
