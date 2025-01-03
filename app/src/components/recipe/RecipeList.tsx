@@ -7,7 +7,7 @@ import SearchBar from "../general/SearchBar";
 
 interface RecipeListProps {
   onUpdateRecipe: (recipe: Recipe) => void;
-  onDeleteRecipe: (recipe: Recipe) => void; // todo move delete button to recipe card large
+  onDeleteRecipe: (recipe: Recipe) => void;
 }
 
 const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe }) => {
