@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import Button from "../general/Button";
 import "../../styles/components/ingredient/IngredientCard.css"
 import { useState } from "react";
@@ -15,7 +14,7 @@ const IngredientCard: React.FC<IngredientCardProps> = ({ ingredient, onUpdateIng
   
   return (
     <div className="ingredient-card">
-      <Link className="ingredient-link" to={`/ingredient/${ingredient._id}`}>{ingredient.name}</Link>
+      <h5>{ingredient.name}</h5>
 
       <div className="ingredient-link-actions">
         <Button
