@@ -61,3 +61,15 @@
 .add-ingredient-form-content form button[type="button"] {
   background-color: #ccc;
 }
+
+.checkbox-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.checkbox-container input {
+  width: auto;
+  cursor: pointer;
+}

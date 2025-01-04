@@ -5,6 +5,7 @@ interface SearchBarProps<T> {
   data: T[];
   onSearchResults: (results: T[]) => void;
 }
+// todo clear search bar after submitting forms
 
 const SearchBar = <T extends { name: string }>({ data, onSearchResults }: SearchBarProps<T>) => {
   const [searchTerm, setSearchTerm] = useState<string>('');

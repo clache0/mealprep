@@ -7,6 +7,7 @@ export interface Day {
 export interface Ingredient {
   _id?: string;
   name: string;
+  isOwned: boolean;
   // todo add category to ingredient
 }
 
