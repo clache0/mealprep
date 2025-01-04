@@ -49,7 +49,7 @@ ingredientRouter.patch("/:id", async (req, res) => {
   if (name) {
     updates["$set"]["name"] = name;
   }
-  if (isOwned) {
+  if (typeof isOwned === "boolean") {
     updates["$set"]["isOwned"] = isOwned;
   }
 
