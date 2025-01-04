@@ -13,7 +13,6 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Home Page</h1>
       <div className="home-container">
         <DaysSection/>
         <IngredientsSection ingredients={weeklyIngredients} />

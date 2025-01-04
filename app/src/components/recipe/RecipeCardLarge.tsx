@@ -126,54 +126,63 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onUpdateRec
           Close
         </button>
 
-        {/* Title */}
-        <div className="recipe-title-container">
-          <div
-            className="recipe-emoji-container"
-            onClick={() => setShowSaveEmoji(true)}
-          >
-            {recipe.emoji ?
-                <div>{recipe.emoji}</div>
-              : <div className="select-emoji-container">Select Emoji</div>
-            }
+        <div className="recipe-card-large-left-container">
+          {/* Title */}
+          <div className="recipe-title-container">
+            <div
+              className="recipe-emoji-container"
+              onClick={() => setShowSaveEmoji(true)}
+            >
+              {recipe.emoji ?
+                  <div>{recipe.emoji}</div>
+                : <div className="select-emoji-container">Select Emoji</div>
+              }
+            </div>
+
+            <h2>{recipe.name}</h2>
           </div>
 
-          <h2>{recipe.name}</h2>
+          {/* Buttons */}
+          <div className="button-container">
+            <Button
+              label="Edit Name and Notes"
+              onClick={() => setIsEditing(true)}
+              backgroundColor="var(--secondary-color)"
+            />
+          </div>
+
+          {/* Notes */}
+          <div className="recipe-notes-container">
+            <h5>Notes</h5>
+            <p>
+              {recipe.notes}
+            </p>
+          </div>
         </div>
 
-        {/* Buttons */}
-        <div className="button-container">
-          <Button
-            label="Edit Name and Notes"
-            onClick={() => setIsEditing(true)}
-            backgroundColor="var(--secondary-color)"
-          />
+        <div className="recipe-card-large-right-container">
+          <div className="recipe-card-large-ingredients-container">
+            <h3>Ingredients</h3>
+            {/* Add Ingredient Button */}
+            <Button
+              label="Add Ingredient"
+              onClick={() => setShowAddIngredientToRecipeForm(true)}
+            />
+          </div>
+
+
+          {/* Ingredients */}
+          <ul>
+            {recipeIngredientNamesList}
+          </ul>
         </div>
 
-        {/* Notes */}
-        <div className="recipe-notes-container">
-          <h5>Notes</h5>
-          <p>
-            {recipe.notes}
-          </p>
-        </div>
-
-        {/* Add Ingredient Button */}
-        <Button
-          label="Add Ingredient"
-          onClick={() => setShowAddIngredientToRecipeForm(true)}
-        />
+        {/* Add Ingredient Form */}
         {showAddIngredientToRecipeForm &&
-        <AddIngredientToRecipeForm
-          onSubmit={handleAddIngredient}
-          onShowForm={setShowAddIngredientToRecipeForm}
-        />}
-
-        {/* Ingredients */}
-        <h3>Ingredients:</h3>
-        <ul>
-          {recipeIngredientNamesList}
-        </ul>
+          <AddIngredientToRecipeForm
+            onSubmit={handleAddIngredient}
+            onShowForm={setShowAddIngredientToRecipeForm}
+          />}
 
         {/* Emoji Selector */}
         {showSaveEmoji &&
