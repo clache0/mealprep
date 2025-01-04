@@ -33,7 +33,7 @@
   transition: visibility 0s, opacity 0.2s linear;
 }
 
-.recipe-link-container:hover .recipe-card-actions {
+.recipe-card-container:hover .recipe-card-actions {
   visibility: visible;
   opacity: 1;
 }

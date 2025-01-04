@@ -25,7 +25,7 @@ const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe 
 
   const recipeList = filteredRecipes.length ? (
     filteredRecipes.map((recipe, index) => (
-      <li key={recipe._id || index} className="recipe-link-container">
+      <li key={recipe._id || index} className="recipe-card-container">
         <RecipeCard
           recipe={recipe}
           onUpdateRecipe={onUpdateRecipe}

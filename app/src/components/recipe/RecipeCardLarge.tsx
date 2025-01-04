@@ -100,7 +100,11 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onUpdateRec
     recipe.ingredientQuantities.map((iq, index) => {
       const ingredientName = recipeIngredientNames[index];
       return (
-        <li key={index} onClick={() => setEditingIndex(index)}>
+        <li
+          key={index}
+          onClick={() => setEditingIndex(index)}
+          className="recipe-card-large-ingredient-li"
+        >
           <p>{ingredientName}</p>
           <div className="right-container">
             <p>{iq.quantity}</p>
@@ -172,7 +176,7 @@ const RecipeCardLarge: React.FC<RecipeCardLargeProps> = ({ recipeId, onUpdateRec
 
 
           {/* Ingredients */}
-          <ul>
+          <ul className="recipe-card-large-ingredients-list">
             {recipeIngredientNamesList}
           </ul>
         </div>

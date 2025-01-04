@@ -43,7 +43,7 @@
   margin: 0;
 }
 
-.recipe-card-large ul {
+.recipe-card-large-ingredients-list {
   list-style-type: none;
   padding: 0px 10px;
   margin: 0;
@@ -55,7 +55,7 @@
   width: 100%;
 }
 
-.recipe-card-large li {
+.recipe-card-large-ingredient-li {
   margin: 3px 0;
   padding: 3px 20px;
   background-color: var(--background-color);
