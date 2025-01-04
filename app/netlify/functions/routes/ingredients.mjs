@@ -43,11 +43,14 @@ ingredientRouter.post("/", async (req, res) => {
 // PATCH Update a single ingredient
 ingredientRouter.patch("/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
-  const { name } = req.body;
+  const { name, isOwned } = req.body;
   const updates = { $set: {} };
 
   if (name) {
     updates["$set"]["name"] = name;
+  }
+  if (isOwned) {
+    updates["$set"]["isOwned"] = isOwned;
   }
 
   // attempt to update ingredient
