@@ -35,6 +35,7 @@ const DaysSection: React.FC<DaysSectionProps> = () => {
     setSelectedDayId(null);
   };
 
+  // todo add emoji
   const dayList = sortedDays.map((day) => (
     <div
       key={day._id || day.name}

@@ -12,6 +12,7 @@
   justify-content: center;
   align-items: center;
   margin: 0;
+  margin-bottom: 5px;
 }
 
 .ingredients-section h3 {
@@ -29,13 +30,23 @@
   align-items: center;
 }
 
-.ingredients-list li {
+.ingredient-item-li {
   padding: 5px;
   border-radius: 8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   color: var(--text-color);
   text-align: center;
-  width: 100px;
+  width: 100%;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ingredients-section-name {
+  margin: 0;
+  margin-right: 5px;
+  font-size: 0.8rem;
 }
 
 .clipboard-container {
