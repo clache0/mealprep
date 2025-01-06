@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppData } from '../../context/AppDataContext';
 import '../../styles/components/day/DaysSection.css';
-import { getRecipeName } from '../../utils/utils';
+import { getRecipeNameFromId } from '../../utils/utils';
 import DayHomeCard from './DayHomeCard';
 
 interface DaysSectionProps {}
@@ -47,7 +47,7 @@ const DaysSection: React.FC<DaysSectionProps> = () => {
         {day.recipeIds.length > 0 ? (
           day.recipeIds.map((recipeId) => (
             <li key={recipeId}>
-              {getRecipeName(recipes, recipeId)}
+              {getRecipeNameFromId(recipes, recipeId)}
             </li>
           ))
         ) : (

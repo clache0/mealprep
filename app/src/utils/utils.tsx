@@ -1,7 +1,7 @@
 import { Recipe, Ingredient, Day } from "../types/types";
 
 // get recipe name from id
-export const getRecipeName = (recipes: Recipe[], recipeId: string) => {
+export const getRecipeNameFromId = (recipes: Recipe[], recipeId: string) => {
   return recipes.find((recipe) => recipe._id === recipeId)?.name || 'Unknown Recipe';
 };
 

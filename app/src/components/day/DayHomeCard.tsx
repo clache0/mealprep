@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAppData } from '../../context/AppDataContext';
-import { getRecipeName } from '../../utils/utils';
+import { getRecipeNameFromId } from '../../utils/utils';
 import '../../styles/components/day/DayHomeCard.css';
 import { addRecipeToDay, deleteRecipeFromDay } from '../../api/apiDay';
 import Button from '../general/Button';
@@ -69,7 +69,7 @@ const DayHomeCard: React.FC<DayHomeCardProps> = ({ dayId, onClose }) => {
 
   const recipeList = day.recipeIds.map((recipeId) => (
     <li key={recipeId}>
-      {getRecipeName(recipes, recipeId)}
+      {getRecipeNameFromId(recipes, recipeId)}
       <Button
         label="X"
         onClick={() => handleDeleteRecipe(recipeId)}
