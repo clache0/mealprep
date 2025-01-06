@@ -15,7 +15,6 @@ const RecipesPage = () => {
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [showAddRecipeForm, setShowAddRecipeForm] = useState<boolean>(false);
   // todo filter recipe by category
-  // todo remove title recipe page, reorg div name and add recipe button next to each other
 
   const handleAddRecipe = async (recipe: Recipe) => {
     try {
@@ -77,9 +76,8 @@ const RecipesPage = () => {
 
   return (
     <div className="recipes-page">
-      <h1>Recipes Page</h1>
-
-      <div className="add-recipe-form-container">
+      <h2>Recipes</h2>
+      <div className="recipes-page-add-recipe-button">
         <Button
           label='Add Recipe'
           onClick={() => {

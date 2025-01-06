@@ -39,8 +39,6 @@ const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe 
 
   return (
     <>
-      <h2>Recipe List</h2>
-
       {/* SearchBar */}
       <div className="search-bar-container">
       <SearchBar
