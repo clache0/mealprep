@@ -1,8 +1,13 @@
 import { Recipe, Ingredient, Day } from "../types/types";
 
 // get recipe name from id
-export const getRecipeNameFromId = (recipes: Recipe[], recipeId: string) => {
+export const getRecipeNameFromId = (recipes: Recipe[], recipeId: string): string => {
   return recipes.find((recipe) => recipe._id === recipeId)?.name || 'Unknown Recipe';
+};
+
+// get recipe from id
+export const getRecipeFromId = (recipes: Recipe[], recipeId: string): Recipe | null => {
+  return recipes.find((recipe) => recipe._id === recipeId) ?? null;
 };
 
 // get all ingredient names from recipe

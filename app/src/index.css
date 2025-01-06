@@ -48,3 +48,9 @@ a:hover {
   justify-content: center;
   align-items: center;
 }
+
+.row-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

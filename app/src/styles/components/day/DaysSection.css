@@ -50,11 +50,23 @@
   list-style-type: none;
   padding: 0;
   margin: 0;
+  color: var(--medium-gray);
 }
 
-.day-recipe-list li {
-  margin: 8px 0;
+.day-recipe-li {
+  margin: 0;
   font-size: 0.9rem;
+}
+
+.day-recipe-li p {
+  margin: 0;
+}
+
+.day-recipe-li p.day-recipe-emoji {
+  margin-right: 5px;
+}
+
+.day-recipe-name {
   color: var(--medium-gray);
 }
 

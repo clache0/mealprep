@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useAppData } from '../../context/AppDataContext';
 import '../../styles/components/day/DaysSection.css';
-import { getRecipeNameFromId } from '../../utils/utils';
+import { getRecipeFromId } from '../../utils/utils';
 import DayHomeCard from './DayHomeCard';
 
 interface DaysSectionProps {}
@@ -35,7 +35,6 @@ const DaysSection: React.FC<DaysSectionProps> = () => {
     setSelectedDayId(null);
   };
 
-  // todo add emoji
   const dayList = sortedDays.map((day) => (
     <div
       key={day._id || day.name}
@@ -45,13 +44,19 @@ const DaysSection: React.FC<DaysSectionProps> = () => {
       <h3>{day.name}</h3>
       <ul className="day-recipe-list">
         {day.recipeIds.length > 0 ? (
-          day.recipeIds.map((recipeId) => (
-            <li key={recipeId}>
-              {getRecipeNameFromId(recipes, recipeId)}
-            </li>
-          ))
+          day.recipeIds.map((recipeId) => {
+            const recipe = getRecipeFromId(recipes, recipeId);
+            if (recipe) {
+              return (
+                <li key={recipeId} className='day-recipe-li row-center'>
+                  <p className='day-recipe-emoji'>{recipe.emoji}</p>
+                  <p className='day-recipe-name'>{recipe.name}</p>
+                </li>
+              );
+            }
+          })
         ) : (
-          <li>No recipes added</li>
+          <li className='day-recipe-li'>No recipes added</li>
         )}
       </ul>
     </div>
