@@ -40,7 +40,6 @@ export const AppDataProvider: React.FC<AppDataProviderProps> = ({ children }) =>
           prev.map((recipe) => (recipe._id === recipeId ? updatedRecipe : recipe))
         )
       );
-      console.log("Successfully updated recipe");
     } catch (error) {
       console.log("Failed to updateRecipe: ", error);
     }
