@@ -54,6 +54,7 @@ const AddRecipeForm: React.FC<AddRecipeFormProps> = ({ onSubmit, onShowForm, rec
       name: name,
       notes: notes,
       ingredientQuantities: ingredientQuantities,
+      emoji: recipe?.emoji,
     };
 
     onSubmit(newRecipe);
