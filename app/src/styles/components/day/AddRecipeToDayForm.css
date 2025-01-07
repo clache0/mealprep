@@ -1,0 +1,29 @@
+.search-form-recipe-ul {
+  height: 200px;
+  width: 80%;
+  overflow-y: auto;
+  list-style-type: none;
+  
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.search-form-recipe-li {
+  margin: 0;
+  margin-bottom: 3px;
+  cursor: pointer;
+  padding: 5px;
+  background-color: var(--background-color);
+  width: 80%;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 0.8rem;
+}
+
+.search-form-recipe-li.selected-recipe {
+  background-color: var(--primary-color);
+  color: white;
+  font-weight: bold;
+}

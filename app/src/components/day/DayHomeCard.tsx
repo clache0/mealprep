@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
 import { useAppData } from '../../context/AppDataContext';
 import { getRecipeNameFromId } from '../../utils/utils';
 import '../../styles/components/day/DayHomeCard.css';
 import { addRecipeToDay, deleteRecipeFromDay } from '../../api/apiDay';
 import Button from '../general/Button';
+import AddRecipeToDayForm from './AddRecipeToDayForm';
 
 interface DayHomeCardProps {
   dayId: string;
@@ -12,23 +12,22 @@ interface DayHomeCardProps {
 
 const DayHomeCard: React.FC<DayHomeCardProps> = ({ dayId, onClose }) => {
   const { days, recipes, setDays } = useAppData();
-  const [newRecipeId, setNewRecipeId] = useState<string>('');
   const day = days.find((d) => d._id === dayId);
 
   if (!day) {
     return <div>Day not found</div>;
   }
 
-  const handleAddRecipe = async () => {
-    if (newRecipeId && !day.recipeIds.includes(newRecipeId) && day && day._id) {
+  const handleAddRecipe = async (recipeId: string) => {
+    if (recipeId && !day.recipeIds.includes(recipeId) && day && day._id) {
       const updatedDay = {
         ...day,
-        recipeIds: [...day.recipeIds, newRecipeId],
+        recipeIds: [...day.recipeIds, recipeId],
       };
 
       try {
         // post recipe to server
-        await addRecipeToDay(day._id, newRecipeId);
+        await addRecipeToDay(day._id, recipeId);
         
         // Update local state
         setDays((prevDays) =>
@@ -37,13 +36,10 @@ const DayHomeCard: React.FC<DayHomeCardProps> = ({ dayId, onClose }) => {
       } catch (error) {
         console.error("handleAddRecipe error trying to addRecipeToDay: ", error);
       }
-
-      // clear selected recipe
-      setNewRecipeId('');
     }
     else {
       console.error("handleAddRecipe new recipe id, day id need to be checked");
-      if (day.recipeIds.includes(newRecipeId)) {
+      if (day.recipeIds.includes(recipeId)) {
         alert("Recipe has already been added to day");
       }
     }
@@ -68,7 +64,10 @@ const DayHomeCard: React.FC<DayHomeCardProps> = ({ dayId, onClose }) => {
   };
 
   const recipeList = day.recipeIds.map((recipeId) => (
-    <li key={recipeId}>
+    <li 
+      key={recipeId}
+      className='day-home-card-li'
+    >
       {getRecipeNameFromId(recipes, recipeId)}
       <Button
         label="X"
@@ -88,27 +87,15 @@ const DayHomeCard: React.FC<DayHomeCardProps> = ({ dayId, onClose }) => {
         <h2>{day.name}</h2>
 
         {/* Add Recipe */}
-        <div className="add-recipe-section">
-          <label htmlFor="add-recipe">Add Recipe</label>
-          <select
-            id="add-recipe"
-            value={newRecipeId}
-            onChange={(e) => setNewRecipeId(e.target.value)}
-          >
-            <option value="" disabled>
-              Select a recipe
-            </option>
-            {recipes.map((recipe) => (
-              <option key={recipe._id} value={recipe._id}>
-                {recipe.name}
-              </option>
-            ))}
-          </select>
-          <button onClick={handleAddRecipe}>Add</button>
+        <div className="add-recipe-section column-center">
+          <AddRecipeToDayForm
+            data={recipes}
+            onSubmit={handleAddRecipe}
+          />
         </div>
 
         {/* Recipe List */}
-        <ul>
+        <ul className='day-home-card-ul'>
           {day.recipeIds.length > 0 ? (
             recipeList
           ) : (
