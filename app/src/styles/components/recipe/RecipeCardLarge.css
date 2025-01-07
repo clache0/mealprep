@@ -55,8 +55,12 @@
   width: 100%;
 }
 
+.recipe-card-large-ingredient-container {
+  width: 80%;
+}
+
 .recipe-card-large-ingredient-li {
-  margin: 3px 0;
+  margin: 3px 8px;
   padding: 3px 20px;
   background-color: var(--background-color);
   border-radius: 0.8rem;
@@ -64,12 +68,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 100%;
   cursor: pointer;
 }
 
 .recipe-card-large p {
   margin: 5px 0;
+  font-size: 0.9rem;
 }
 
 .recipe-card-large-left-container {
