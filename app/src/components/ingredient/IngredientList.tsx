@@ -25,7 +25,7 @@ const IngredientList: React.FC<IngredientListProps> = ({ onUpdateIngredient, onD
   const ingredientList = filteredIngredients.map((ingredient, index) => (
     <li 
       key={ingredient._id || index} 
-      className="ingredient-link-container"
+      className="ingredient-card-container"
     >
       <IngredientCard
         ingredient={ingredient}
