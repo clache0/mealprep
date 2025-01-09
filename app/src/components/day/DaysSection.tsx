@@ -3,15 +3,17 @@ import { useAppData } from '../../context/AppDataContext';
 import '../../styles/components/day/DaysSection.css';
 import { getRecipeFromId } from '../../utils/utils';
 import DayHomeCard from './DayHomeCard';
+import Button from '../general/Button';
+import { patchDaysBatch } from '../../api/apiDay';
 
 interface DaysSectionProps {}
 
 const DaysSection: React.FC<DaysSectionProps> = () => {
-  const { days, recipes } = useAppData();
+  const { days, recipes, setDays } = useAppData();
   const [showDayHomeCard, setShowDayHomeCard] = useState<boolean>(false);
   const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
   // todo add clear all recipes from days button
-  
+
   const dayOrder = [
     'Monday',
     'Tuesday',
@@ -35,6 +37,15 @@ const DaysSection: React.FC<DaysSectionProps> = () => {
     setShowDayHomeCard(false);
     setSelectedDayId(null);
   };
+
+  const handleClearWeek = async () => {
+    const updatedDays = days.map((day) => ({
+      ...day,
+      recipeIds: [],
+    }));
+    await patchDaysBatch(updatedDays); // update database
+    setDays(updatedDays); // update local state
+  }
 
   const dayList = sortedDays.map((day) => (
     <div
@@ -65,7 +76,14 @@ const DaysSection: React.FC<DaysSectionProps> = () => {
 
   return (
     <div className="days-section">
-      <h2>Weekly Plan</h2>
+      <div className='days-section-title-container row-center'>
+        <h2>Weekly Plan</h2>
+        <Button
+          label="Clear Week"
+          onClick={handleClearWeek}
+          backgroundColor='var(--primary-color)'
+        />
+      </div>
       {showDayHomeCard && selectedDayId ? (
         <DayHomeCard dayId={selectedDayId} onClose={handleCloseDayHomeCard} />
       ) : (

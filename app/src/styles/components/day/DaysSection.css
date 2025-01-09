@@ -10,10 +10,14 @@
   height: 60vh;
 }
 
+.days-section-title-container {
+  margin-bottom: 20px;
+}
+
 .days-section h2 {
   text-align: center;
   font-size: 24px;
-  margin-bottom: 20px;
+  margin-right: 20px;
 }
 
 .days-container {

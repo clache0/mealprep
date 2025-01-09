@@ -89,6 +89,30 @@ export const patchDay = async (day: Day) => {
   }
 };
 
+export const patchDaysBatch = async (days: Day[]) => {
+  const url = `${config.serverUrl}/days/batch/update`;
+
+  try {
+    const response = await fetch(url, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(days),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to patch batch of days');
+    }
+
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error('Error patching batch of days:', error);
+    throw error;
+  }
+};
+
 export const deleteDayById = async (dayId: string) => {
   const url = config.serverUrl + `/days/${dayId}`;
 
