@@ -108,6 +108,32 @@ dayRouter.patch("/:id", async (req, res) => {
   }
 });
 
+// PATCH Batch update multiple days
+dayRouter.patch("/batch/update", async (req, res) => {
+  const days = req.body;
+
+  if (!Array.isArray(days)) {
+    return res.status(400).json({ error: "Input must be an array of Day objects" });
+  }
+
+  try {
+    const db = await connectToDatabase();
+    const collection = await db.collection("days");
+
+    const bulkOperations = days.map((day) => {
+      const query = { _id: new ObjectId(day._id) };
+      const update = { $set: { name: day.name, recipeIds: day.recipeIds } };
+      return { updateOne: { filter: query, update } };
+    });
+
+    const result = await collection.bulkWrite(bulkOperations);
+    res.status(200).json({ message: "Batch update completed", result });
+  } catch (error) {
+    console.error("Error updating batch of days: ", error);
+    res.status(500).json({ error: "Failed to update batch of days" });
+  }
+});
+
 // DELETE single day
 dayRouter.delete("/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
