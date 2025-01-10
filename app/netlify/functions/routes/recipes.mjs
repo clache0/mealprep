@@ -43,19 +43,20 @@ recipeRouter.post("/", async (req, res) => {
 // PATCH Update a single recipe
 recipeRouter.patch("/:id", async (req, res) => {
   const query = { _id: new ObjectId(req.params.id) };
-  const { name, notes, ingredientQuantities } = req.body;
+  const { name, notes, ingredientQuantities, category } = req.body;
   const updates = { $set: {} };
 
   if (name) {
     updates["$set"]["name"] = name;
   }
-
   if (notes) {
     updates["$set"]["notes"] = notes;
   }
-
   if (ingredientQuantities) {
     updates["$set"]["ingredientQuantities"] = ingredientQuantities;
+  }
+  if (category) {
+    updates["$set"]["category"] = category;
   }
 
   // attempt to update recipe
