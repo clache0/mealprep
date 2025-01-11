@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import { useAppData } from "../../context/AppDataContext";
 import "../../styles/components/recipe/RecipeList.css";
-import { Recipe } from "../../types/types";
+import { Recipe, RecipeCategory } from "../../types/types";
 import RecipeCard from "./RecipeCard";
 import SearchBar from "../general/SearchBar";
+import RecipeCategoryNavbar from "./RecipeCategoryNavbar";
 
 interface RecipeListProps {
   onUpdateRecipe: (recipe: Recipe) => void;
@@ -13,15 +14,21 @@ interface RecipeListProps {
 const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe }) => {
   const { recipes } = useAppData();
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>(recipes || []);
+  const [selectedCategory, setSelectedCategory] = useState<RecipeCategory | null>(null);
 
   if (!recipes) {
     return <div>Loading Recipe List...</div>;
   }
 
+  // todo: search in category instead of all of recipes
   // update filtered recipes if full list changes
   useEffect(() => {
-    setFilteredRecipes(recipes);
-  }, [recipes]);
+    let updatedRecipes = recipes;
+    if (selectedCategory && selectedCategory !== RecipeCategory.Undecided) {
+      updatedRecipes = recipes.filter(recipe => recipe.category === selectedCategory);
+    }
+    setFilteredRecipes(updatedRecipes);
+  }, [recipes, selectedCategory]);
 
   const recipeList = filteredRecipes.length ? (
     filteredRecipes.map((recipe, index) => (
@@ -41,11 +48,16 @@ const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe 
     <>
       {/* SearchBar */}
       <div className="search-bar-container">
-      <SearchBar
-        data={recipes}
-        onSearchResults={setFilteredRecipes}
-      />
+        <SearchBar
+          data={recipes}
+          onSearchResults={setFilteredRecipes}
+        />
       </div>
+
+      {/* Recipe Category Navbar */}
+      <RecipeCategoryNavbar
+        onSelectCategory={setSelectedCategory}
+      />
       
       {/* Recipe List */}
       <ul className="recipe-list">{recipeList}</ul>

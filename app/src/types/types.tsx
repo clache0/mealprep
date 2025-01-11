@@ -11,13 +11,25 @@ export interface Ingredient {
   // todo add category to ingredient
 }
 
+export enum RecipeCategory {
+  Undecided = "Undecided",
+  Beef = "Beef",
+  Chicken = "Chicken",
+  Pork = "Pork",
+  Pasta = "Pasta",
+  Soup = "Soup",
+  Salad = "Salad",
+  Veggies = "Veggies",
+  Spices = "Spices",
+}
+
 export interface Recipe {
   _id?: string;
   name: string;
   notes?: string;
   ingredientQuantities: IngredientQuantities[];
   emoji?: string;
-  // todo add category to recipe
+  category: RecipeCategory;
 }
 
 export interface IngredientQuantities {

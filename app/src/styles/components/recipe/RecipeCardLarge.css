@@ -41,6 +41,7 @@
 .recipe-card-large h5 {
   text-align: center;
   margin: 0;
+  margin-bottom: 5px;
 }
 
 .recipe-card-large-ingredients-list {

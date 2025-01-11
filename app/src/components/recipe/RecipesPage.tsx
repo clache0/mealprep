@@ -87,7 +87,7 @@ const RecipesPage = () => {
         />
       </div>
 
-      <div className="recipe-list-container">
+      <div className="column-center">
         <RecipeList
           onUpdateRecipe={handleUpdateRecipe}
           onDeleteRecipe={openDeleteModal}

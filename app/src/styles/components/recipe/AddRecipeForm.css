@@ -73,3 +73,20 @@
 .add-recipe-form-content form button[type="button"] {
   background-color: #ccc;
 }
+
+.add-recipe-form-content select {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  min-width: 200px;
+  font-size: 0.8rem;
+  text-align: center;
+}
+
+.add-recipe-form-notes-container {
+  margin: 10px 0;
+}
+
+.add-recipe-form-category-container {
+  margin-bottom: 10px;
+}

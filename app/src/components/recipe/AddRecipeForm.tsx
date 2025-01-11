@@ -1,8 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import '../../styles/components/recipe/AddRecipeForm.css'
-import { IngredientQuantities, Recipe } from '../../types/types';
-// import { useAppData } from '../../context/AppDataContext';
-// import Button from '../general/Button';
+import { IngredientQuantities, Recipe, RecipeCategory } from '../../types/types';
 
 interface AddRecipeFormProps {
   onSubmit: (recipe: Recipe) => void;
@@ -15,8 +13,9 @@ const AddRecipeForm: React.FC<AddRecipeFormProps> = ({ onSubmit, onShowForm, rec
   const [name, setName] = useState<string>(recipe?.name || '');
   const [notes, setNotes] = useState<string>(recipe?.notes || '');
   const [ingredientQuantities, setIngredientQuantities] = useState<IngredientQuantities[]>(
-    recipe?.ingredientQuantities || []
-  );
+    recipe?.ingredientQuantities || []);
+  const [category, setCategory] = useState<RecipeCategory>(
+    recipe?.category || RecipeCategory.Undecided);
 
   const nameInputRef = useRef<HTMLInputElement | null>(null);
   
@@ -27,25 +26,6 @@ const AddRecipeForm: React.FC<AddRecipeFormProps> = ({ onSubmit, onShowForm, rec
     }
   }, []);
 
-  // const handleIngredientChange = (index: number, field: string, value: string) => {
-  //   const updatedIngredients = [...ingredientQuantities];
-  //   if (field === 'ingredientId') {
-  //     updatedIngredients[index].ingredientId = value;
-  //   }
-  //   else if (field === 'quantity') {
-  //     updatedIngredients[index].quantity = value;
-  //   }
-  //   setIngredientQuantities(updatedIngredients);
-  // }
-
-  // const handleAddIngredient = () => {
-  //   setIngredientQuantities([...ingredientQuantities, { ingredientId: '', quantity: '' }]);
-  // }
-
-  // const handleRemoveIngredient = (index: number) => {
-  //   setIngredientQuantities(ingredientQuantities.filter((_, i) => i !== index));
-  // }
-
   const handleSubmit = (event: React.FormEvent) => {
     event.preventDefault();
 
@@ -55,6 +35,7 @@ const AddRecipeForm: React.FC<AddRecipeFormProps> = ({ onSubmit, onShowForm, rec
       notes: notes,
       ingredientQuantities: ingredientQuantities,
       emoji: recipe?.emoji,
+      category: category,
     };
 
     onSubmit(newRecipe);
@@ -65,6 +46,7 @@ const AddRecipeForm: React.FC<AddRecipeFormProps> = ({ onSubmit, onShowForm, rec
       setName('');
       setNotes('');
       setIngredientQuantities([]);
+      setCategory(RecipeCategory.Undecided);
     }
   };
 
@@ -87,7 +69,7 @@ const AddRecipeForm: React.FC<AddRecipeFormProps> = ({ onSubmit, onShowForm, rec
           </div>
 
           {/* Notes */}
-          <div>
+          <div className='add-recipe-form-notes-container'>
             <label htmlFor="notes">Notes</label>
             <textarea
               id="notes"
@@ -96,49 +78,19 @@ const AddRecipeForm: React.FC<AddRecipeFormProps> = ({ onSubmit, onShowForm, rec
             />
           </div>
 
-          {/* Ingredients */}
-          {/* <div>
-            <h3>Ingredients</h3>
-
-            <Button
-              label='Add Ingredient'
-              onClick={handleAddIngredient}
-              backgroundColor='var(--secondary-color)'
-            />
-
-            <div className='ingredient-quantities-container'>
-              {ingredientQuantities.map((ingredient, index) => (
-                <div key={index} className="ingredient-row">
-                  <select
-                    value={ingredient.ingredientId}
-                    onChange={(event) =>
-                      handleIngredientChange(index, 'ingredientId', event.target.value)
-                    }
-                  >
-                    <option value="">Select Ingredient</option>
-                    {ingredients.map((ing) => (
-                      <option key={ing._id} value={ing._id}>
-                        {ing.name}
-                      </option>
-                    ))}
-                  </select>
-                  <input
-                    type="text"
-                    placeholder="Quantity"
-                    value={ingredient.quantity}
-                    onChange={(event) =>
-                      handleIngredientChange(index, 'quantity', event.target.value)
-                    }
-                  />
-                  <Button
-                    label='X'
-                    onClick={() => handleRemoveIngredient(index)}
-                    backgroundColor='var(--red)'
-                  />
-                </div>
+          {/* Category Dropdown */}
+          <div className='add-recipe-form-category-container'>
+            <label htmlFor="category">Category</label>
+            <select
+              id="category"
+              value={category}
+              onChange={(event) => setCategory(event.target.value as RecipeCategory)}
+            >
+              {Object.values(RecipeCategory).map((cat) => (
+                <option key={cat} value={cat}>{cat}</option>
               ))}
-            </div>
-          </div> */}
+            </select>
+          </div>
 
           {/* Submit */}
           <button type="submit">{recipe ? 'Update Recipe' : 'Add Recipe'}</button>
