@@ -24,14 +24,16 @@ const RecipeCategoryNavbar: React.FC<RecipeCategoryNavbarProps> = ({ onSelectCat
 
   return (
     <div className="recipe-category-navbar">
-      {Object.values(RecipeCategory).map((category) => (
-        <Button
-          key={category}
-          label={category}
-          onClick={() => handleCategoryClick(category)}
-          backgroundColor={selectedCategory === category ? 'var(--primary-color)' : 'var(--medium-gray)'}
-        />
-      ))}
+      {Object.values(RecipeCategory)
+        .filter(category => category !== RecipeCategory.Undecided)
+        .map((category) => (
+          <Button
+            key={category}
+            label={category}
+            onClick={() => handleCategoryClick(category)}
+            backgroundColor={selectedCategory === category ? 'var(--primary-color)' : 'var(--medium-gray)'}
+          />
+        ))}
     </div>
   );
 };
