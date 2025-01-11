@@ -12,7 +12,6 @@ const DaysSection: React.FC<DaysSectionProps> = () => {
   const { days, recipes, setDays } = useAppData();
   const [showDayHomeCard, setShowDayHomeCard] = useState<boolean>(false);
   const [selectedDayId, setSelectedDayId] = useState<string | null>(null);
-  // todo add clear all recipes from days button
 
   const dayOrder = [
     'Monday',

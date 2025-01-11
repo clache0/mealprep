@@ -14,7 +14,6 @@ const RecipesPage = () => {
   const [recipeToDelete, setRecipeToDelete] = useState<Recipe | null>(null);
   const [showDeleteModal, setShowDeleteModal] = useState<boolean>(false);
   const [showAddRecipeForm, setShowAddRecipeForm] = useState<boolean>(false);
-  // todo filter recipe by category
 
   const handleAddRecipe = async (recipe: Recipe) => {
     try {
