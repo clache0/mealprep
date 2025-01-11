@@ -29,7 +29,7 @@ const RecipeCategoryNavbar: React.FC<RecipeCategoryNavbarProps> = ({ onSelectCat
           key={category}
           label={category}
           onClick={() => handleCategoryClick(category)}
-          backgroundColor={selectedCategory === category ? 'var(--primary-color)' : 'var(--secondary-color)'}
+          backgroundColor={selectedCategory === category ? 'var(--primary-color)' : 'var(--medium-gray)'}
         />
       ))}
     </div>
