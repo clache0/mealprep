@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import "../../styles/components/general/SearchBar.css"
 
 interface SearchBarProps<T> {
@@ -20,6 +20,11 @@ const SearchBar = <T extends { name: string }>({ data, onSearchResults }: Search
 
     onSearchResults(filteredResults);
   };
+
+  // clear search term if data changes
+  useEffect(() => {
+    setSearchTerm('');
+  }, [data]);
 
   return (
     <div className="search-bar">
