@@ -13,6 +13,7 @@ interface RecipeListProps {
 
 const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe }) => {
   const { recipes } = useAppData();
+  const [categoryRecipes, setCategoryRecipes] = useState<Recipe[]>(recipes || []);
   const [filteredRecipes, setFilteredRecipes] = useState<Recipe[]>(recipes || []);
   const [selectedCategory, setSelectedCategory] = useState<RecipeCategory | null>(null);
 
@@ -20,15 +21,22 @@ const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe 
     return <div>Loading Recipe List...</div>;
   }
 
-  // todo: search in category instead of all of recipes
-  // update filtered recipes if full list changes
+  // update category recipes if selected category
   useEffect(() => {
-    let updatedRecipes = recipes;
-    if (selectedCategory && selectedCategory !== RecipeCategory.Undecided) {
-      updatedRecipes = recipes.filter(recipe => recipe.category === selectedCategory);
+    if (selectedCategory) {
+      const updatedRecipes = recipes.filter(recipe => recipe.category === selectedCategory);
+      setCategoryRecipes(updatedRecipes);
     }
-    setFilteredRecipes(updatedRecipes);
+    else {
+      setCategoryRecipes(recipes); // unselect category, return all recipes
+    }
   }, [recipes, selectedCategory]);
+
+  // update filtered recipes if category changes
+  useEffect(() => {
+    setFilteredRecipes(categoryRecipes);
+  }, [categoryRecipes]);
+
 
   const recipeList = filteredRecipes.length ? (
     filteredRecipes.map((recipe, index) => (
@@ -49,7 +57,7 @@ const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe 
       {/* SearchBar */}
       <div className="search-bar-container">
         <SearchBar
-          data={recipes}
+          data={categoryRecipes}
           onSearchResults={setFilteredRecipes}
         />
       </div>
