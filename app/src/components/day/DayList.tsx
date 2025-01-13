@@ -30,7 +30,7 @@ const DayList: React.FC<DayListProps> = ({ onUpdateDay, onDeleteDay }) => {
   return (
     <>
       <h2>Day List</h2>
-      <ul className="day-list column-center">
+      <ul className="day-list">
         {dayList}
       </ul>
     </>
