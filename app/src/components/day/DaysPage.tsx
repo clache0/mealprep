@@ -84,7 +84,7 @@ const DaysPage = () => {
         />
       </div>
 
-      <div className="day-list-container">
+      <div className="day-list-container column-center">
         <DayList
           onUpdateDay={handleUpdateDay}
           onDeleteDay={openDeleteModal}

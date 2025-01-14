@@ -23,3 +23,14 @@
 .recipe-card-container a:hover {
   color: var(--primary-color);
 }
+
+/* Media query for phone screens */
+@media (max-width: 768px) {
+  .recipe-list {
+    grid-template-columns: 1fr; /* Change to single column layout */
+  }
+
+  .recipe-card-container {
+    width: 100%;
+  }
+}

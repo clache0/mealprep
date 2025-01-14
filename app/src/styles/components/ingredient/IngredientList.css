@@ -21,3 +21,14 @@
 .ingredient-card-container a:hover {
   color: var(--primary-color);
 }
+
+/* Media query for phone screens */
+@media (max-width: 768px) {
+  .ingredient-list {
+    grid-template-columns: 1fr; /* Change to single column layout */
+  }
+
+  .ingredient-card-container {
+    width: 100%;
+  }
+}
