@@ -16,6 +16,7 @@ export enum RecipeCategory {
   Beef = "Beef",
   Chicken = "Chicken",
   Pork = "Pork",
+  Fish = "Fish",
   Pasta = "Pasta",
   Soup = "Soup",
   Salad = "Salad",
