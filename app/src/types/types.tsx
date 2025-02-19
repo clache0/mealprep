@@ -18,10 +18,12 @@ export enum RecipeCategory {
   Pork = "Pork",
   Fish = "Fish",
   Pasta = "Pasta",
+  Noodle = "Noodle",
   Soup = "Soup",
   Salad = "Salad",
   Veggies = "Veggies",
   Spices = "Spices",
+  Other = "Other",
 }
 
 export interface Recipe {
