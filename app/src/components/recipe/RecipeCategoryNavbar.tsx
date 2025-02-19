@@ -7,6 +7,8 @@ interface RecipeCategoryNavbarProps {
   onSelectCategory: (category: RecipeCategory | null) => void;
 }
 
+// todo update categories to include sauces, undecided
+
 const RecipeCategoryNavbar: React.FC<RecipeCategoryNavbarProps> = ({ onSelectCategory }) => {
   const [selectedCategory, setSelectedCategory] = useState<RecipeCategory | null>(null);
 

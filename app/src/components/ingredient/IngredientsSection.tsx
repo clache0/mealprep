@@ -11,6 +11,8 @@ interface IngredientsSectionProps {
   ingredients: Ingredient[];
 }
 
+// todo home page ingredient button press UX feedback
+
 const IngredientsSection: React.FC<IngredientsSectionProps> = ({ ingredients }) => {
   const { setIngredients } = useAppData();
   const [showOwnedIngredients, setShowOwnedIngredients] = useState<boolean>(true);

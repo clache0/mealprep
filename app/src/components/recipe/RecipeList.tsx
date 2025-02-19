@@ -11,6 +11,8 @@ interface RecipeListProps {
   onDeleteRecipe: (recipe: Recipe) => void;
 }
 
+// todo recipe press UX feedback
+
 const RecipeList: React.FC<RecipeListProps> = ({ onUpdateRecipe, onDeleteRecipe }) => {
   const { recipes } = useAppData();
   const [categoryRecipes, setCategoryRecipes] = useState<Recipe[]>(recipes || []);
